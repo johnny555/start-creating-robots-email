@@ -1,0 +1,45 @@
+{
+    "name": "Start Creating Robots WSL Dev Container",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "humble-desktop-full",
+    "workspaceFolder": "/workspace/",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "betwo.b2-catkin-tools",
+                "DotJoshJohnson.xml",
+                "ms-azuretools.vscode-docker",
+                "ms-iot.vscode-ros",
+                "ms-python.python",
+                "ms-vscode.cpptools",
+                "redhat.vscode-yaml",
+                "smilerobotics.urdf",
+                "streetsidesoftware.code-spell-checker",
+                "twxs.cmake",
+                "yzhang.markdown-all-in-one",
+                "jaehyunshim.vscode-ros2",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "ms-python.vscode-pylance",
+                "ms-iot.vscode-ros"
+            ],
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.languageServer": "Pylance",
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true,
+                "C_Cpp.clang_format_path": "clang-format",
+                "C_Cpp.clang_format_fallbackStyle": "Google",
+                "C_Cpp.formatting": "default",
+                "ros.distro": "humble",
+                "ros.packagePath": "/opt/ros/humble/share/"
+            }
+        }
+    }
+}
