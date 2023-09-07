@@ -30,13 +30,6 @@ cd ..
 
 # -----------------------------------------------------
 
-# Now download repo code. 
-mkdir src
-cd src
-git clone https://github.com/johnny555/krytn_cafe
-cd ..
-# ------------------------
-
 # Now install Gazebo ign
 apt-get install -y ros-humble-ros-gz
 
@@ -49,6 +42,10 @@ adduser --disabled-password --gecos "docker user" ros
 echo 'ros ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ros && chmod 0440 /etc/sudoers.d/ros
 chown -R ros /workspace
 
+# Do an initial build
+
+colcon build --symlink-install
+
 # Get python deps
 
 sudo apt install python3-pip
@@ -57,3 +54,6 @@ pip install black
 # Make it so that sourcing happens automatically
 echo "source /opt/ros/humble/setup.bash" >> /home/ros/.bashrc
 echo "source /workspace/install/setup.bash" >> /home/ros/.bashrc
+
+# Suppress deprecated setuptools warning
+echo "PYTHONWARNINGS=\"ignore:setup.py install is deprecated::setuptools.command.install,ignore:easy_install command is deprecated::setuptools.command.easy_install\"; export PYTHONWARNINGS" >> /home/ros/.bashrc
