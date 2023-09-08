@@ -1,0 +1,7 @@
+[
+    {
+        "key": "ctrl+shift+alt+g",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Start Gazebo"
+    }
+]
