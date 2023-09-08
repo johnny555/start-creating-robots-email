@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version='1.9'>
+<include>
+<uri>
+https://fuel.gazebosim.org/1.0/OpenRobotics/models/Clearpath Robotics Husky A200
+</uri>
+</include>
+</sdf>

@@ -17,14 +17,11 @@ def generate_launch_description():
             executable='create',
             output='screen',
             parameters=[{
-                'world': 'cafe_world',
-                'file': join(models_path, 'husky.sdf')
+                '-world': 'cafe_world',
+                '-file': join(models_path, 'husky.sdf')
                 }],
         )
 
-    gazebo_sim = IncludeLaunchDescription(path,
-                                          launch_arguments=[("gz_args", cafe_world_uri)])
     
 
-
-    return LaunchDescription([gazebo_sim])
+    return LaunchDescription([spawn_husky])

@@ -12,6 +12,8 @@ setup(
         ("share/" + package_name, ["package.xml"]),
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         (join('share', package_name, 'launch'), glob('launch/*launch.py')),
+        (join('share', package_name, 'worlds_and_models'), glob('worlds_and_models/*')),
+        
     ],
     install_requires=["setuptools"],
     zip_safe=True,

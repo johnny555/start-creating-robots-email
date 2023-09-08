@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version='1.9'>
+<world name="cafe_world">
+<include>
+    <uri>
+    https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cafe
+    </uri>
+</include>
+</world>
+</sdf>
