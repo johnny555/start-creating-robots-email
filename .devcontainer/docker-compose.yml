@@ -2,7 +2,6 @@ version: '3'
 services:
   humble-desktop-full:
     image: johnny555/stc:v1
-    build: .
     user: ros
     volumes:
       - ../:/workspace:cached
