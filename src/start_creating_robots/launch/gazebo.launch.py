@@ -30,13 +30,28 @@ def generate_launch_description():
         output="both"
     )
 
-       # Bridge
+    # Bridge
+    lidar_gazebo_topic_preamble = '/world/cafe_world/model/robot/model/lidar_2d_v1/link/link/sensor/lidar_2d_v1'
+    camera_gazebo_topic_preamble = '/world/cafe_world/model/robot/model/realsense_d435/link/link/sensor/realsense_d435'
+    
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=['/model/x1/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-                   '/model/x1/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry'],
-        output='screen'
+                   '/model/x1/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+                   lidar_gazebo_topic_preamble + '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
+                   lidar_gazebo_topic_preamble + '/scan/points@sensor_msgs/msg/PointCloud2@gz.msgs.PointCloudPacked',
+                   camera_gazebo_topic_preamble + '/image@sensor_msgs/msg/Image@gz.msgs.Image',
+                   camera_gazebo_topic_preamble + '/depth@sensor_msgs/msg/Image@gz.msgs.Image',
+                   camera_gazebo_topic_preamble + '/points@sensor_msgs/msg/PointCloud2@gz.msgs.PointCloudPacked',
+                   '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen',
+        remappings=[(lidar_gazebo_topic_preamble + '/scan','/scan'), 
+                    (lidar_gazebo_topic_preamble + '/scan/points','/scan/points'), 
+                    (camera_gazebo_topic_preamble + '/image' ,    '/realsense/image'),
+                    (camera_gazebo_topic_preamble + '/depth' ,    '/realsense/depth'),
+                    (camera_gazebo_topic_preamble + '/points',    '/realsense/points'),
+                    ]
     )
 
     robot_steering = Node(
@@ -45,4 +60,4 @@ def generate_launch_description():
         remappings=[('/cmd_vel','/model/x1/cmd_vel')]
     )
 
-    return LaunchDescription([gazebo_sim, robot, bridge, robot_steering])
+    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering])
