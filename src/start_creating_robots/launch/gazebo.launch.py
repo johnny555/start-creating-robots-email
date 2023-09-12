@@ -15,15 +15,7 @@ def generate_launch_description():
     gazebo_sim = IncludeLaunchDescription(path,
                                           launch_arguments=[("gz_args", cafe_world_uri)])
     
-    spawn_robot = Node(
-            name='spawn_robot',
-            package='ros_gz_sim',
-            executable='create',
-            output='screen',
-           
-            arguments =[ f"-world cafe_world -file '{robot_file}' -z 0.5"],
-            
-        )
+
     robot = ExecuteProcess(
         cmd=["ros2", "run", "ros_gz_sim", "create", "-file", robot_file, "-z", "0.5"],
         name="spawn robot",
