@@ -1,0 +1,11 @@
+<include>
+<uri>
+https://fuel.gazebosim.org/1.0/OpenRobotics/models/Gazebo - relative paths
+</uri>
+
+</include>
+<include>
+<uri>
+https://fuel.gazebosim.org/1.0/OpenRobotics/models/Clearpath Robotics Husky A200
+</uri>
+</include>

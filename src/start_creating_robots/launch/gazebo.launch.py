@@ -10,16 +10,15 @@ def generate_launch_description():
     models_path = join(get_package_share_directory("start_creating_robots"), "worlds_and_models")
     cafe_world_uri = join(models_path,"cafe.sdf")
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
-
+    husky_file = join(models_path, 'husky.sdf')
     spawn_husky = Node(
             name='spawn_husky',
             package='ros_gz_sim',
             executable='create',
             output='screen',
             parameters=[{
-                'world': 'cafe_world',
-                'file': join(models_path, 'husky.sdf')
-                }],
+                'world': 'cafe_world'                }],
+            arguments=[{"--file" :husky_file}]
         )
 
     gazebo_sim = IncludeLaunchDescription(path,
