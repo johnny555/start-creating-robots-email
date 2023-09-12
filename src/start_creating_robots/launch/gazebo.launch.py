@@ -34,11 +34,15 @@ def generate_launch_description():
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/model/X1/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-                   '/model/X1/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry'],
+        arguments=['/model/x1/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+                   '/model/x1/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry'],
         output='screen'
     )
 
+    robot_steering = Node(
+        package="rqt_robot_steering",
+        executable="rqt_robot_steering",
+        remappings=[('/cmd_vel','/model/x1/cmd_vel')]
+    )
 
-
-    return LaunchDescription([gazebo_sim, robot, bridge])
+    return LaunchDescription([gazebo_sim, robot, bridge, robot_steering])

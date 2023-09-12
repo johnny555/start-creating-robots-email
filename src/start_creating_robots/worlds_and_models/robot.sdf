@@ -2,7 +2,7 @@
 <sdf version='1.9'>
     <include>
         <uri>
-        https://fuel.gazebosim.org/1.0/OpenRobotics/models/X1 Config 3
+        https://fuel.gazebosim.org/1.0/OpenRobotics/models/X1 UGV
         </uri>
         <plugin 
                 filename="ignition-gazebo-diff-drive-system"
@@ -14,8 +14,8 @@
                 <right_joint>front_right_wheel_joint</right_joint>
                 <right_joint>back_right_wheel_joint</right_joint>
 
-                <wheel_separation>1.25</wheel_separation>
-                <wheel_radius>0.3</wheel_radius>
+                <wheel_separation>0.6</wheel_separation>
+                <wheel_radius>0.03</wheel_radius>
                 <odom_publish_frequency>1</odom_publish_frequency>
                 <max_linear_acceleration>1</max_linear_acceleration>
                 <min_linear_acceleration>-1</min_linear_acceleration>

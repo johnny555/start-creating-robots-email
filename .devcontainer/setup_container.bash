@@ -42,6 +42,10 @@ adduser --disabled-password --gecos "docker user" ros
 echo 'ros ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ros && chmod 0440 /etc/sudoers.d/ros
 chown -R ros /workspace
 
+# Install some extra stuff
+
+apt-get install -y ros-humble-rqt-robot-steering 
+
 # Do an initial build
 
 colcon build --symlink-install
