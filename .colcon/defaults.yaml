@@ -1,0 +1,8 @@
+{
+  "build":
+    {
+      "merge-install": true,
+      "symlink-install": true,
+      "event-handlers": ["console_direct+", "status+", "summary+"],
+    },
+}
