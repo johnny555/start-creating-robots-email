@@ -4,4 +4,4 @@ source install/setup.bash
 PYTHONWARNINGS="ignore:setup.py install is deprecated::setuptools.command.install,ignore:easy_install command is deprecated::setuptools.command.easy_install"; 
 export PYTHONWARNINGS
 
-colcon build --symlink-install
+colcon build 

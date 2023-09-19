@@ -1,0 +1,32 @@
+# Configuration to connect Gazebo simulation topics to ROS topics
+- topic_name: "/model/magni/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+
+- topic_name: "/model/magni/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+
+- topic_name: "/world/cafe_world/model/robot/model/lidar_2d_v1/link/link/sensor/lidar_2d_v1/scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+
+- topic_name: "/world/cafe_world/model/robot/model/realsense_d435/link/sensor/realsense_d435/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+
+- topic_name: "/world/cafe_world/model/robot/model/realsense_d435/link/sensor/realsense_d435/depth"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+
+- topic_name: "/world/cafe_world/model/robot/model/realsense_d435/link/sensor/realsense_d435/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+
+- topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
+
+- topic_name: "/model/robot/model/magni/pose"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"

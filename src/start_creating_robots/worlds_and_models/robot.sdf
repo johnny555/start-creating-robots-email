@@ -4,7 +4,7 @@
     <!-- Include the robot base. Configure it with a differential drive control plugin -->
     <include>
         <uri>
-        https://fuel.gazebosim.org/1.0/OpenRobotics/models/X1 UGV
+        model://magni
         </uri>
 
         <plugin
@@ -24,14 +24,12 @@
                 filename="ignition-gazebo-diff-drive-system"
                 name="ignition::gazebo::systems::DiffDrive">
 
-                <left_joint>front_left_wheel_joint</left_joint>
-                <left_joint>back_left_wheel_joint</left_joint>
+                <left_joint>left_wheel_joint</left_joint>
 
-                <right_joint>front_right_wheel_joint</right_joint>
-                <right_joint>back_right_wheel_joint</right_joint>
+                <right_joint>right_wheel_joint</right_joint>
 
-                <wheel_separation>0.7</wheel_separation>
-                <wheel_radius>0.15</wheel_radius>
+                <wheel_separation>0.326</wheel_separation>
+                <wheel_radius>0.128</wheel_radius>
                 <odom_publish_frequency>1</odom_publish_frequency>
                 <max_linear_acceleration>1</max_linear_acceleration>
                 <min_linear_acceleration>-1</min_linear_acceleration>
@@ -47,38 +45,62 @@
     <!-- Include an extra 2D Lidar -->
     <include>
         <uri>
-        https://fuel.gazebosim.org/1.0/OpenRobotics/models/Lidar 2d v1
+        model://lidar_2d_v1
         </uri>
-        <pose>0.3 0 0.26 0 0 0</pose>
+        <pose>0.1 0 0.26 0 0 0</pose>
 
+      <plugin
+        filename="ignition-gazebo-pose-publisher-system"
+        name="ignition::gazebo::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+      </plugin>
     </include>
 
     <!-- This joint connects the robot to the lidar -->
     <joint name="lidar_joint" type="fixed">
-        <parent>x1::base</parent>
+        <parent>magni::base_footprint</parent>
         <child>lidar_2d_v1::link</child> <!-- link is the name of the lidar link.  -->
+        <origin rpy="0 0 0" xyz="0 0 0.198"/>
     </joint>
 
-    <!-- Include an extra Depth camera -->
     <include>
         <uri>
-        https://fuel.gazebosim.org/1.0/OpenRobotics/models/Intel RealSense D435
+        model://realsense_d435
         </uri>
-        <pose>0.6 0 0.16 0 0 1.57</pose>    
+        <pose>0.2 0 0.2 0 0 1.57</pose>
+
+      <plugin
+        filename="ignition-gazebo-pose-publisher-system"
+        name="ignition::gazebo::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+      </plugin>    
     </include>
 
+     
     <joint name="depth_camera_joint" type="fixed">
-        <parent>x1::base</parent>
+        <parent>magni::base_footprint</parent>
         <child>realsense_d435::link</child>
     </joint>
 
+    
    <!-- Adding this plugin allows sensors -->
     <plugin
     filename="ignition-gazebo-sensors-system"
     name="ignition::gazebo::systems::Sensors">
         <render_engine>ogre2</render_engine>
     </plugin>
-    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"/>
+    <plugin
+    filename="ignition-gazebo-pose-publisher-system"
+    name="ignition::gazebo::systems::PosePublisher">
+    <publish_link_pose>true</publish_link_pose>
+
+    <use_pose_vector_msg>true</use_pose_vector_msg>
+    </plugin>
+
 
 </model>
 
