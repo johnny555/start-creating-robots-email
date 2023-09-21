@@ -55,7 +55,8 @@ def generate_launch_description():
                    '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'],
         output='screen',
         remappings=[('/model/krytn/odometry','/odom'),
-                    ('/model/krytn/tf','/tf')]
+                    ('/model/krytn/tf','/tf'),
+                    ('/model/krytn/cmd_vel','/cmd_vel')]
     )
 
     # Gazebo fortress has a bug that won't respect our frame_id tags. So we have to publish a transform 
@@ -75,7 +76,6 @@ def generate_launch_description():
     robot_steering = Node(
         package="rqt_robot_steering",
         executable="rqt_robot_steering",
-        remappings=[('/cmd_vel','/model/krytn/cmd_vel')]
     )
 
     return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, depth_cam_link_tf, krytn_base_fp_link_tf])
