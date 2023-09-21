@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="wheel_r" value="0.1" />
+  <xacro:property name="wheel_xpos" value="0.11" />
+  <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/inertial.xacro" />
+
+
+  <xacro:macro name="low_friction">
+              <mu>0.1</mu>
+              <mu1>0.1</mu1> 
+              <mu2>0.1</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+  </xacro:macro>
+
+
+  <xacro:macro name="high_friction">
+                <mu>0.5</mu>
+                <mu1>0.5</mu1> 
+                <mu2>0.5</mu2>
+                <minDepth>0.005</minDepth>
+                <kp>1e8</kp>
+        
+  </xacro:macro>
+
+
+ <link name="base_footprint"/>
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${wheel_r}" rpy="0 0 0"/>
+  </joint>
+  <!-- Base Link -->
+  <link name="base_link">
+    <origin xyz="-0.25 0 ${0.03}" rpy="0 0 0" />  
+
+    <visual>
+      <origin xyz="${-wheel_xpos} 0 ${-wheel_r+0.071}" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find start_creating_robots)/worlds_and_models/krytn/meshes/magni_body.dae" />
+      </geometry>
+    </visual>
+       
+    <collision>
+	    <origin xyz="${-wheel_xpos} 0 ${-wheel_r+0.151}" rpy="0 0 0" />
+      <geometry>
+        <box size="0.398 0.268 0.160"/>
+      </geometry>
+    </collision>
+  
+    <collision>
+      <origin xyz="${-wheel_xpos-0.026} 0 ${-wheel_r+0.248}" rpy="0 0 0" />
+      <geometry>
+        <box size="0.375 0.268 0.034"/>
+      </geometry>
+
+    </collision>
+  
+    <collision>
+      <origin xyz="${-wheel_xpos-0.169} 0.169 ${-wheel_r+0.106}" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.07 0.07"/>
+      </geometry>
+    </collision>
+  
+    <collision>
+      <origin xyz="${-wheel_xpos-0.169} -0.169 ${-wheel_r+0.106}" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.07 0.07"/>
+      </geometry>
+    </collision>
+
+    
+    <xacro:box_inertial_with_origin  x="0.398" y="0.221" z="0.150" mass="10.0">
+      <origin xyz="-0.15 0 0.03" rpy="0 0 0" /> 
+    </xacro:box_inertial_with_origin>
+
+  </link>
+
+  <gazebo reference="base_link">
+  <xacro:low_friction/>
+  </gazebo>
+
+ <!-- Macro for defining wheels -->
+  <xacro:macro name="wheel" params="prefix reflect">
+    <link name="${prefix}_wheel">
+           
+      <collision>
+        <origin xyz="${0.033*reflect} 0 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder radius="${wheel_r}" length="0.01"/>
+        </geometry>
+      </collision>
+   
+
+      <visual>
+        <origin xyz="${-0.071*reflect} 0 0" rpy="0 ${(reflect-1)*pi/2} 0" />
+        <geometry>
+          <mesh filename="file://$(find start_creating_robots)/worlds_and_models/krytn/meshes/front_wheel.dae" />
+        </geometry>
+      </visual>
+
+
+      <xacro:cylinder_inertial_with_origin radius="${wheel_r}" length="0.05" mass="1.34">
+        <origin xyz="0 0 0" rpy="0 ${pi/2} 0" />
+      </xacro:cylinder_inertial_with_origin>
+    </link>
+
+    
+
+    <joint name="${prefix}_wheel_joint" type="continuous">
+      <axis xyz="1 0 0" rpy="0 0 0" />
+      <parent link="base_link"/>
+      <child link="${prefix}_wheel"/>
+      <origin xyz="0 ${0.163*reflect} 0" rpy="0 0 ${pi/2}"/>
+      <dynamics damping="0.2" friction="0.8"/>
+      
+      
+    </joint>
+
+    <gazebo reference="${prefix}_wheel">
+    <xacro:high_friction/>
+    </gazebo>
+
+  </xacro:macro>
+
+  <!--- create wheels -->
+  <xacro:wheel prefix="left" reflect="1"/>
+  <xacro:wheel prefix="right" reflect="-1"/>
+
+
+  <!-- Macro for defining caster wheels -->
+  <xacro:macro name="caster_wheel" params="prefix reflect">
+    <link name="${prefix}_caster_wheel">
+      <origin xyz="-0.37 ${reflect*0.169} ${-wheel_r+0.04}" rpy="0 0 0" />
+      <collision>
+        <origin xyz="-0.27 ${reflect*0.169} ${-wheel_r+0.04}" rpy="0 0 0" />
+        <geometry>
+          <sphere radius="0.04"/>
+        </geometry>        
+       
+      </collision>
+      <visual>
+        <origin xyz="-0.25 ${reflect*0.169} 0" rpy="0 0 ${pi}" />
+
+        <geometry>
+          <mesh filename="file://$(find start_creating_robots)/worlds_and_models/krytn/meshes/caster_wheel.dae" />
+        </geometry>
+      </visual>
+
+      <!-- removing inertia of caster wheels so that base inertial is not tilted. 
+      <xacro:cylinder_inertial_with_origin radius="${wheel_r}" length="0.05" mass="3.34">
+          <origin xyz="0 0 0" rpy="0 ${pi/2} 0" />
+       </xacro:cylinder_inertial_with_origin> 
+       -->
+    </link>
+
+
+
+    <joint name="${prefix}_caster_wheel_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${prefix}_caster_wheel"/>
+       
+    </joint>
+
+
+  <gazebo reference="${prefix}_caster_wheel">
+     <xacro:low_friction/>
+  </gazebo>
+
+
+
+  </xacro:macro>
+
+    <!-- and caster wheels )-->
+  <xacro:caster_wheel prefix="left" reflect="1"/>
+  <xacro:caster_wheel prefix="right" reflect="-1"/>
+
+</robot>

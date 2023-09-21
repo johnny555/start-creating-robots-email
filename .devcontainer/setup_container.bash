@@ -63,4 +63,4 @@ echo "source /workspace/install/setup.bash" >> /home/ros/.bashrc
 echo "PYTHONWARNINGS=\"ignore:setup.py install is deprecated::setuptools.command.install,ignore:easy_install command is deprecated::setuptools.command.easy_install\"; export PYTHONWARNINGS" >> /home/ros/.bashrc
 
 # Add GAZEBO path so we can easily include models
-echo "export IGN_GAZEBO_RESOURCE_PATH=/workspace/src/start_creating_robots/worlds_and_models/" >> /home/ros/.bashrc
+echo "export IGN_GAZEBO_RESOURCE_PATH=/workspace/install/start_creating_robots/share/start_creating_robots/worlds_and_models/" >> /home/ros/.bashrc

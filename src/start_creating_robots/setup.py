@@ -15,16 +15,24 @@ setup(
         
         (join('share', package_name, 'launch'), glob('launch/*launch.py')),
         
-        (join('share', package_name, 'worlds_and_models'), glob('worlds_and_models/*.sdf')),
+        (join('share', package_name, 'worlds_and_models'), glob('worlds_and_models/*.*')),
 
-        (join('share', package_name, 'worlds_and_models/X1'), glob('worlds_and_models/X1/*.*')),
-        (join('share', package_name, 'worlds_and_models/X1/materials/textures'), 
-                glob('worlds_and_models/X1/materials/textures/*.jpg')),
-        (join('share', package_name, 'worlds_and_models/X1/meshes'), 
-                glob('worlds_and_models/X1/meshes/*.dae')),
+        (join('share', package_name, 'worlds_and_models/Cafe'), glob('worlds_and_models/Cafe/*.*')),
+        (join('share', package_name, 'worlds_and_models/Cafe/materials/textures'), 
+                glob('worlds_and_models/Cafe/materials/textures/*.jpg')),
+        (join('share', package_name, 'worlds_and_models/Cafe/meshes'), 
+                glob('worlds_and_models/Cafe/meshes/*.dae')),
+
         (join('share', package_name, 'worlds_and_models/krytn'), glob('worlds_and_models/krytn/*.*')),
-        (join('share', package_name, 'worlds_and_models/krytn/meshes'), glob('worlds_and_models/krytn/meshes/*.dae')),
-        (join('share', package_name, 'config'), glob('config/*.yaml'))
+        (join('share', package_name, 'worlds_and_models/krytn/materials/textures'), 
+                glob('worlds_and_models/krytn/materials/textures/*.jpg')),
+        (join('share', package_name, 'worlds_and_models/krytn/materials/scripts'), 
+                glob('worlds_and_models/krytn/materials/scripts/*.material')),
+        (join('share', package_name, 'worlds_and_models/krytn/meshes'), 
+                glob('worlds_and_models/krytn/meshes/*.dae')),
+        
+
+
     ],
     install_requires=["setuptools"],
     zip_safe=True,

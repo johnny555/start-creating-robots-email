@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="krytn" >
+
+    <!-- Include the robot base. Configure it with a differential drive control plugin -->
+    <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/magni.urdf.xacro" />  
+    <!-- Include an extra 2D Lidar -->
+    <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/lidar_2d_v1.urdf.xacro" />
+
+    <!-- Include a realsense d435 -->
+    <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/realsense_d435.urdf.xacro" />
+
+
+    <!-- Gazebo specific plugins-->
+    <gazebo >
+      
+        <plugin
+        filename="ignition-gazebo-sensors-system"
+        name="ignition::gazebo::systems::Sensors">
+            <render_engine>ogre2</render_engine>
+        </plugin>
+
+        
+        <!-- Publish joints for robot description tf publisher. -->
+        <plugin
+            filename="ignition-gazebo-joint-state-publisher-system"
+            name="ignition::gazebo::systems::JointStatePublisher">
+            <topic>joint_states</topic>
+        </plugin>
+
+        <!-- Plugin to allow Gazebo to recieve cmd_vel and rotate wheels in Gazebo. -->
+        <plugin
+                filename="ignition-gazebo-diff-drive-system"
+                name="ignition::gazebo::systems::DiffDrive">
+
+                <left_joint>left_wheel_joint</left_joint>
+
+                <right_joint>right_wheel_joint</right_joint>
+                
+                <frame_id>odom</frame_id>
+                <wheel_separation>0.326</wheel_separation>
+                <wheel_radius>0.128</wheel_radius>
+                <odom_publish_frequency>1</odom_publish_frequency>
+                <max_linear_acceleration>1</max_linear_acceleration>
+                <min_linear_acceleration>-1</min_linear_acceleration>
+                <max_angular_acceleration>2</max_angular_acceleration>
+                <min_angular_acceleration>-2</min_angular_acceleration>
+                <max_linear_velocity>0.5</max_linear_velocity>
+                <min_linear_velocity>-0.5</min_linear_velocity>
+                <max_angular_velocity>1</max_angular_velocity>
+                <min_angular_velocity>-1</min_angular_velocity>
+        </plugin>
+        
+    </gazebo>
+</robot>

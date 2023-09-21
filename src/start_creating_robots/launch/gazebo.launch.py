@@ -13,24 +13,11 @@ def generate_launch_description():
     models_path = join(get_package_share_directory("start_creating_robots"), "worlds_and_models")
     cafe_world_uri = join(models_path,"cafe.sdf")
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
-    robot_file = join(models_path, 'robot.sdf')
 
-    #cafe_world_uri = 'empty.sdf'
-    gazebo_sim = IncludeLaunchDescription(path,
-                                          launch_arguments=[("gz_args", '-r ' + cafe_world_uri)])
-    
-
-    robot = ExecuteProcess(
-        cmd=["ros2", "run", "ros_gz_sim", "create", "-file", robot_file, "-z", "0.5"],
-        name="spawn robot",
-        output="both"
-    )
-
-    robot_description_config = xacro.process_file(
-        robot_file
-    )
+    robot_file = join(models_path, "krytn","krytn.urdf.xacro")
+    robot_description_config = xacro.process_file(robot_file)
     robot_description = {'robot_description': robot_description_config.toxml()}
-
+    
     # Robot state publisher
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -40,44 +27,49 @@ def generate_launch_description():
         parameters=[robot_description],
     )
 
-    # Bridge
-    lidar_gazebo_topic_preamble = '/world/cafe_world/model/robot/model/lidar_2d_v1/link/link/sensor/lidar_2d_v1'
-    camera_gazebo_topic_preamble = '/world/cafe_world/model/robot/model/realsense_d435/link/link/sensor/realsense_d435'
+    gazebo_sim = IncludeLaunchDescription(path,
+                                          launch_arguments=[("gz_args", '-r ' + cafe_world_uri)])
+    
+
+    robot = ExecuteProcess(
+        cmd=["ros2", "run", "ros_gz_sim", "create", "-topic", "robot_description", "-z", "0.5"],
+        name="spawn robot",
+        output="both"
+    )
+
+
+    # Gazebo Bridge: This allows communication from the Gazebo world to the ROS system.
     
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/model/magni/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-                   '/model/magni/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-                   lidar_gazebo_topic_preamble + '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
-                   lidar_gazebo_topic_preamble + '/scan/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-                   camera_gazebo_topic_preamble + '/image@sensor_msgs/msg/Image[gz.msgs.Image',
-                   camera_gazebo_topic_preamble + '/depth@sensor_msgs/msg/Image[gz.msgs.Image',
-                   camera_gazebo_topic_preamble + '/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+        arguments=['/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+                   '/model/krytn/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+                   '/model/krytn/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+                   '/lidar@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
+                   '/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+                   '/realsense/image@sensor_msgs/msg/Image[gz.msgs.Image',
+                   '/realsense/depth@sensor_msgs/msg/Image[gz.msgs.Image',
+                   '/realsense/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
                    '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
-                   '/model/robot/model/magni/pose@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-                   '/world/cafe_world/model/robot/joint_state@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-                   '/world/cafe_world/model/robot/model/magni/joint_state@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-                   '/world/cafe_world/model/robot/model/realsense_d435/joint_state@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
-                   '/world/cafe_world/model/robot/model/lidar_2d_v1/joint_state@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'],
+                   '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'],
         output='screen',
-        remappings=[(lidar_gazebo_topic_preamble + '/scan','/scan'), 
-                    (lidar_gazebo_topic_preamble + '/scan/points','/scan/points'), 
-                    (camera_gazebo_topic_preamble + '/image' ,    '/realsense/image'),
-                    (camera_gazebo_topic_preamble + '/depth' ,    '/realsense/depth'),
-                    (camera_gazebo_topic_preamble + '/points',    '/realsense/points'),
-                    ('/model/robot/model/magni/pose','/tf'),
-                    ('/world/cafe_world/model/robot/joint_state','/tf'),
-                    ('/world/cafe_world/model/robot/model/magni/joint_state','/tf'),
-                    ('/world/cafe_world/model/robot/model/realsense_d435/joint_state','/tf'),
-                    ('/world/cafe_world/model/robot/model/lidar_2d_v1/joint_state', '/tf')
-                    ]
+        remappings=[('/model/krytn/odometry','/odom'),
+                    ('/model/krytn/tf','/tf')]
     )
+
+    # Gazebo fortress has a bug that won't respect our frame_id tags. So we have to publish a transform 
+    depth_cam_link_tf = Node(package='tf2_ros',
+                     executable='static_transform_publisher',
+                     name='depthCamLinkTF',
+                     output='log',
+                     arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'realsense_d435', 'krytn/base_footprint/realsense_d435'])
+
 
     robot_steering = Node(
         package="rqt_robot_steering",
         executable="rqt_robot_steering",
-        remappings=[('/cmd_vel','/model/magni/cmd_vel')]
+        remappings=[('/cmd_vel','/model/krytn/cmd_vel')]
     )
 
-    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher])
+    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, depth_cam_link_tf])
