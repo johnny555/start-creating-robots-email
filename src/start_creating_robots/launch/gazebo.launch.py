@@ -65,6 +65,12 @@ def generate_launch_description():
                      output='log',
                      arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'realsense_d435', 'krytn/base_footprint/realsense_d435'])
 
+    krytn_base_fp_link_tf = Node(package='tf2_ros',
+                     executable='static_transform_publisher',
+                     name='base_fp_linkTF',
+                     output='log',
+                     arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0',  'krytn/base_footprint', 'base_footprint'])
+
 
     robot_steering = Node(
         package="rqt_robot_steering",
@@ -72,4 +78,4 @@ def generate_launch_description():
         remappings=[('/cmd_vel','/model/krytn/cmd_vel')]
     )
 
-    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, depth_cam_link_tf])
+    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, depth_cam_link_tf, krytn_base_fp_link_tf])

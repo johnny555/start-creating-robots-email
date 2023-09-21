@@ -39,7 +39,7 @@
                 <frame_id>odom</frame_id>
                 <wheel_separation>0.326</wheel_separation>
                 <wheel_radius>0.128</wheel_radius>
-                <odom_publish_frequency>1</odom_publish_frequency>
+                <odom_publish_frequency>20</odom_publish_frequency>
                 <max_linear_acceleration>1</max_linear_acceleration>
                 <min_linear_acceleration>-1</min_linear_acceleration>
                 <max_angular_acceleration>2</max_angular_acceleration>

@@ -17,9 +17,7 @@
           </submesh>
         </mesh>
       </geometry>
- 
-    </visual>
-    
+    </visual>    
 </link>
 
 <joint name="depth_camera_joint" type="fixed">
