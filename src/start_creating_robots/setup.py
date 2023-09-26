@@ -16,6 +16,7 @@ setup(
         (join('share', package_name, 'launch'), glob('launch/*launch.py')),
         
         (join('share', package_name, 'config'), glob('config/*.yaml')),
+        (join('share', package_name, 'config'), glob('config/*.rviz')),
         
         (join('share', package_name, 'worlds_and_models'), glob('worlds_and_models/*.*')),
 

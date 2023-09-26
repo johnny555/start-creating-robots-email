@@ -1,24 +1,29 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="krytn" >
 
+    <xacro:arg name="with_sensors" default="true" />
+
     <!-- Include the robot base. Configure it with a differential drive control plugin -->
     <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/magni.urdf.xacro" />  
-    <!-- Include an extra 2D Lidar -->
-    <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/lidar_2d_v1.urdf.xacro" />
 
-    <!-- Include a realsense d435 -->
-    <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/realsense_d435.urdf.xacro" />
+    <xacro:if value="$(arg with_sensors)" >
+        <!-- Include an extra 2D Lidar -->
+        <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/lidar_2d_v1.urdf.xacro" />
 
+        <!-- Include a realsense d435 -->
+        <xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/realsense_d435.urdf.xacro" />
+    </xacro:if>
 
     <!-- Gazebo specific plugins-->
     <gazebo >
       
-        <plugin
-        filename="ignition-gazebo-sensors-system"
-        name="ignition::gazebo::systems::Sensors">
-            <render_engine>ogre2</render_engine>
-        </plugin>
-
+        <xacro:if value="$(arg with_sensors)" >        
+            <plugin
+            filename="ignition-gazebo-sensors-system"
+            name="ignition::gazebo::systems::Sensors">
+                <render_engine>ogre2</render_engine>
+            </plugin>
+        </xacro:if>
         
         <!-- Publish joints for robot description tf publisher. -->
         <plugin
