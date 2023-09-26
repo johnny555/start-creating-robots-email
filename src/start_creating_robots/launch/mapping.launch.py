@@ -1,9 +1,10 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, SetLaunchConfiguration
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
+from launch.event_handlers import OnExecutionComplete
 
 from os.path import join
 
@@ -18,8 +19,9 @@ def generate_launch_description():
     base_path = get_package_share_directory("start_creating_robots")
         
     # We will include everything from the gazebo launch file, making sure that sensors are now enabled however.
-    gazebo = IncludeLaunchDescription(join(base_path, "launch","gazebo.launch.py"), 
-                                      launch_arguments=[("with_sensors","true")])
+
+    with_sensors_true = SetLaunchConfiguration("with_sensors","true")
+    gazebo = IncludeLaunchDescription(join(base_path, "launch","gazebo.launch.py"))
 
     # Extended Gazebo Bridge: To do mapping requires alot more info from the simulation. We need sensor data and estimates of the robot joint positions.
     extended_bridge = Node( package='ros_gz_bridge', name="extended_gazebo_bridge", executable='parameter_bridge', arguments=['/model/krytn/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
@@ -59,10 +61,11 @@ def generate_launch_description():
     )
 
 
-    return LaunchDescription([gazebo,
-                            extended_bridge, 
-                            depth_cam_link_tf, 
-                            krytn_base_fp_link_tf,
-                            slam_toolbox, 
-                            rviz, 
-                            rviz_config_arg])
+    return LaunchDescription([with_sensors_true, 
+                                gazebo,
+                                extended_bridge, 
+                                depth_cam_link_tf, 
+                                krytn_base_fp_link_tf,
+                                slam_toolbox, 
+                                rviz, 
+                                rviz_config_arg])
