@@ -1,21 +1,21 @@
 [
     {
-        "key": "ctrl+shift+alt+2",
+        "key": "ctrl+alt+2",
         "command": "workbench.action.tasks.runTask",
         "args": "Day 2"
     },
     {
-        "key": "ctrl+shift+alt+3",
+        "key": "ctrl+alt+3",
         "command": "workbench.action.tasks.runTask",
         "args": "Day 3"
     },
     {
-        "key": "ctrl+shift+alt+4",
+        "key": "ctrl+alt+4",
         "command": "workbench.action.tasks.runTask",
         "args": "Day 4"
     },
     {
-        "key": "ctrl+shift+alt+5",
+        "key": "ctrl+alt+5",
         "command": "workbench.action.tasks.runTask",
         "args": "Day 5"
     }

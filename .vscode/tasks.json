@@ -25,25 +25,29 @@
             "label": "Day 2",
             "detail": "Test that Gazebo works!",
             "type": "shell",
-            "command": "bash .vscode/scripts/day2.sh"
+            "command": "bash .vscode/scripts/day2.sh",
+            "problemMatcher": []
         },
         {
             "label": "Day 3",
             "detail": "Teleoperate a robot",
             "type": "shell",
-            "command": "bash .vscode/scripts/day3.sh"
+            "command": "bash .vscode/scripts/day3.sh",
+            "problemMatcher": []
         },
         {
             "label": "Day 4",
             "detail": "Create your first map",
             "type": "shell",
-            "command": "bash .vscode/scripts/day4.sh"
+            "command": "bash .vscode/scripts/day4.sh",
+            "problemMatcher": []
         },
         {
             "label": "Day 5",
             "detail": "Let your robot drive itself",
             "type": "shell",
-            "command": "bash .vscode/scripts/day5.sh"
+            "command": "bash .vscode/scripts/day5.sh",
+            "problemMatcher": []
         }
     ]
 }
