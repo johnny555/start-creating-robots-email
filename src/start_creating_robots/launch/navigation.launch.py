@@ -18,7 +18,7 @@ def generate_launch_description():
 
     # We will include everything from the mapping launch file, making sure that sensors are now enabled and setting up RVIZ for navigation.
     gazebo_and_mapping = IncludeLaunchDescription(join(base_path, "launch","mapping.launch.py"),
-                                      launch_arguments=[("with_sensors","true"), ("rviz_config","navigation.yaml")])
+                                      launch_arguments=[("with_sensors","true"), ("rviz_config","nav.rviz")])
 
     # Nav2 bringup for navigation
     navigation = IncludeLaunchDescription(

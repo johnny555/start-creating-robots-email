@@ -21,7 +21,8 @@ def generate_launch_description():
     # We will include everything from the gazebo launch file, making sure that sensors are now enabled however.
 
     with_sensors_true = SetLaunchConfiguration("with_sensors","true")
-    gazebo = IncludeLaunchDescription(join(base_path, "launch","gazebo.launch.py"))
+    gazebo = IncludeLaunchDescription(join(base_path, "launch","gazebo.launch.py"),
+                                      launch_arguments=[('with_sensors','true')])
 
     # Extended Gazebo Bridge: To do mapping requires alot more info from the simulation. We need sensor data and estimates of the robot joint positions.
     extended_bridge = Node( package='ros_gz_bridge', name="extended_gazebo_bridge", executable='parameter_bridge', arguments=['/model/krytn/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',

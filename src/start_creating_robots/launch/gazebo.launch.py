@@ -18,7 +18,6 @@ def generate_launch_description():
     # This allows us to use the with_sensors variable in substitutions in this launch description.
     with_sensors = LaunchConfiguration('with_sensors', default="false")
 
-
     models_path = join(get_package_share_directory("start_creating_robots"), "worlds_and_models")
 
     # Start a simulation with the cafe world
