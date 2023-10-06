@@ -44,7 +44,7 @@ chown -R ros /workspace
 
 # Install some extra stuff
 
-apt-get install -y ros-humble-rqt-robot-steering ros-humble-slam-toolbox ros-humble-navigation2
+apt-get install -y ros-humble-rqt-robot-steering ros-humble-slam-toolbox ros-humble-navigation2 ros-humble-nav2-bringup
 
 # Do an initial build
 
