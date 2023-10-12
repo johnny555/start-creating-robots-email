@@ -43,7 +43,8 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         output='both',
-        parameters=[{'robot_description':robot_xml}],
+        parameters=[{'robot_description':robot_xml, 
+                     'use_sim_time':True}],
     )
 
     # Step 3. Spawn a robot in gazebo by listening to the published topic.

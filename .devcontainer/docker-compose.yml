@@ -1,24 +1,13 @@
 version: '3'
 services:
   humble-desktop-full:
-    image: johnny555/stc:v1
+    image: johnny555/stc:v1.01
     user: ros
     volumes:
       - ../:/workspace:cached
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /mnt/wslg:/mnt/wslg
       - /usr/lib/wsl:/usr/lib/wsl
-
-    devices:
-      - /dev/dxg:/dev/dxg
-
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
 
     environment:
       - DISPLAY=:0
