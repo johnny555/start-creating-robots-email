@@ -25,7 +25,11 @@ setup(
                 glob('worlds_and_models/Cafe/materials/textures/*.jpg')),
         (join('share', package_name, 'worlds_and_models/Cafe/meshes'), 
                 glob('worlds_and_models/Cafe/meshes/*.dae')),
-
+        (join('share', package_name, 'worlds_and_models/truck/meshes'), 
+                glob('worlds_and_models/truck/meshes/*.dae')),
+        (join('share', package_name, 'worlds_and_models/truck/'), 
+                glob('worlds_and_models/truck/*.urdf')),
+                
         (join('share', package_name, 'worlds_and_models/krytn'), glob('worlds_and_models/krytn/*.*')),
         (join('share', package_name, 'worlds_and_models/krytn/materials/textures'), 
                 glob('worlds_and_models/krytn/materials/textures/*.jpg')),

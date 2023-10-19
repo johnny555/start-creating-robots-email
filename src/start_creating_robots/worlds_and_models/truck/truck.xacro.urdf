@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="haul_truck" >
+<xacro:include filename="$(find start_creating_robots)/worlds_and_models/krytn/inertial.xacro" />
+
+
+<link name="truck_body">
+  <origin xyz="0.2 0 0.2" rpy="0 0 0" />
+    <collision name="collision">
+      <geometry>
+        <mesh filename="file://$(find start_creating_robots)/worlds_and_models/truck/meshes/body.dae" />
+      </geometry>
+    </collision>
+    <visual name= "visual">
+      <geometry>
+        <mesh filename="file://$(find start_creating_robots)/worlds_and_models/truck/meshes/body.dae">
+        </mesh>
+      </geometry>
+    </visual>    
+    <xacro:box_inertial_with_origin  x="3.8" y="4.8" z="4.2" mass="7000.0">
+      <origin xyz="-0.15 0 0.03" rpy="0 0 0" /> 
+    </xacro:box_inertial_with_origin>
+
+</link>
+
+</robot>
