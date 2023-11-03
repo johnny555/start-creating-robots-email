@@ -6,15 +6,9 @@ If you're like me, you've probably spent way too much time trying to figure out 
 
 This course is my attempt at making an easy path for you.
 
-Read on or check out this video (Only 2 min long!): 
+Read on or check out this video : 
 
-
-
-
-
-
-
-
+[Day1](https://youtu.be/PLi3HtUg5Zg)
 
 # Who is this course for?
 

@@ -62,6 +62,8 @@ I'd love to help you more, I'm putting together a book and online course, and if
 
 I'm also running a 4 week robotics simulation challenge. If that's sounds fun to you, you can sign up here: 
 
+https://start-creating-robots.ck.page/products/4-week-robotics-challenge
+
 
 
 Cheers!
