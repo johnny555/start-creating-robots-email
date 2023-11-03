@@ -15,7 +15,11 @@ Gazebo is like the world, and this robot is now like a remote controlled car. Yo
 
 ## Take some time to play with the simulation. 
 
-Notice the number in the bottom right of the screen, this number is the real-time percentage of your simulation. If its at or near 100% this means that the simulation is running at realtime, if its less than 100% then the simulation is running slower than real time. For example, 30% means every 3 real world seconds, only 1 second elapses in the simulated world. It should be running pretty fast right now, but tomorrow it will be different.
+Notice the number in the bottom right of the screen, this number is the real-time percentage of your simulation. 
+
+If its at or near 100% this means that the simulation is running at realtime, if its less than 100% 
+then the simulation is running slower than real time. For example, 30% means every 3 real world seconds, only 1 second elapses in the simulated world. It should be running pretty fast right now, but tomorrow it will be different.
+
 That's all I wanted to show you today, but if you want to dive a little deeper, there are two other things I'd like to highlight. 
 
 # Launching Your Robot System
