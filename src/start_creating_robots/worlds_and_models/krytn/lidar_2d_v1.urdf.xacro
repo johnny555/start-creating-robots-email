@@ -1,70 +1,70 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-<link name="lidar_2d_v1">
-  <origin xyz="0.1 0 0.36" rpy="0 0 0" />  
+  <link name="lidar_2d_v1">
+    <origin xyz="0.1 0 0.36" rpy="0 0 0" />
 
-  <xacro:cylinder_inertial_with_origin radius="0.02" length="0.35" mass="0.13">
-    <origin xyz="0 0 0.03" rpy="0 ${pi/2} 0" />
-  </xacro:cylinder_inertial_with_origin>
-  
-  <collision name="collision_base">
-    <pose>0 0 0.0175015175 0 0 0</pose>
-    <geometry>
-      <box size="0.05001062 0.05001062 0.035003035"/>
-    </geometry>
-  </collision>
-  <collision name="collision_top">
-    <pose>0 0 0.0525045525 0 0 0</pose>
-    <geometry>
-      <cylinder radius="0.02" length="0.035003035" />
-    </geometry>
-  </collision>
-  <visual name="visual">
-    <pose>0 0 0 0 0 1.5707</pose>
-    <geometry>
-      <mesh filename="file://$(find start_creating_robots)/worlds_and_models/krytn//meshes/lidar_2d_v1.dae"/>
-    </geometry>
-  </visual>
-  
-</link>
+    <xacro:cylinder_inertial_with_origin radius="0.02" length="0.35" mass="0.13">
+      <origin xyz="0 0 0.03" rpy="0 ${pi/2} 0" />
+    </xacro:cylinder_inertial_with_origin>
 
-<!-- This joint connects the robot to the lidar -->
-<joint name="lidar_joint" type="fixed">
+    <collision name="collision_base">
+      <pose>0 0 0.0175015175 0 0 0</pose>
+      <geometry>
+        <box size="0.05001062 0.05001062 0.035003035"/>
+      </geometry>
+    </collision>
+    <collision name="collision_top">
+      <pose>0 0 0.0525045525 0 0 0</pose>
+      <geometry>
+        <cylinder radius="0.02" length="0.035003035" />
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <pose>0 0 0 0 0 1.5707</pose>
+      <geometry>
+        <mesh filename="file://$(find start_creating_robots)/worlds_and_models/krytn//meshes/lidar_2d_v1.dae"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <!-- This joint connects the robot to the lidar -->
+  <joint name="lidar_joint" type="fixed">
     <parent link="base_footprint" />
-    <child link="lidar_2d_v1" /> 
-    <origin rpy="0 0 0" xyz="0 0 0.398"/>
-</joint>
+    <child link="lidar_2d_v1" />
+    <origin rpy="0 0 0" xyz="-0.1 0 0.268"/>
+  </joint>
 
-<gazebo reference="lidar_2d_v1">
-  <sensor name="lidar_2d_v1" type="gpu_ray">
-    <topic>lidar</topic>
-    <ignition_frame_id>lidar_2d_v1</ignition_frame_id>
-    <pose>0 0 0.0525045525 0 0 0</pose>
-    <ray>
-      <scan>
-        <horizontal>
-          <samples>90</samples>
-          <resolution>1</resolution>
-          <min_angle>-1.41</min_angle>
-          <max_angle>1.41</max_angle>
-        </horizontal>
-      </scan>
-      <range>
-        <min>0.060</min>
-        <max>10</max>
-        <resolution>0.04</resolution>
-      </range>
-      <noise>
-        <type>gaussian</type>
-        <mean>0.0</mean>
-        <stddev>0.001</stddev>
-      </noise>
-    </ray>
-    <always_on>0</always_on>
-    <update_rate>20</update_rate>
-    <visualize>false</visualize>
-  </sensor>
-</gazebo>
+  <gazebo reference="lidar_2d_v1">
+    <sensor name="lidar_2d_v1" type="gpu_ray">
+      <topic>lidar</topic>
+      <ignition_frame_id>lidar_2d_v1</ignition_frame_id>
+      <pose>0 0 0.0525045525 0 0 0</pose>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>90</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.41</min_angle>
+            <max_angle>1.41</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.060</min>
+          <max>10</max>
+          <resolution>0.04</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.001</stddev>
+        </noise>
+      </ray>
+      <always_on>0</always_on>
+      <update_rate>20</update_rate>
+      <visualize>false</visualize>
+    </sensor>
+  </gazebo>
 
 </robot>
