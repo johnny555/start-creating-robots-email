@@ -21,7 +21,7 @@ def generate_launch_description():
     models_path = join(get_package_share_directory("start_creating_robots"), "worlds_and_models")
 
     # Start a simulation with the cafe world
-    cafe_world_uri = join(models_path,"cafe.sdf")
+    cafe_world_uri = join(models_path,"simple_cafe.sdf")
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
     
     gazebo_sim = IncludeLaunchDescription(path,
@@ -58,7 +58,10 @@ def generate_launch_description():
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'],
+        arguments=['/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+                   '/coke/detach@std_msgs/msg/Empty@gz.msgs.Empty',
+                   '/coke/attach@std_msgs/msg/Empty@gz.msgs.Empty',
+                   ],
         output='screen',
         remappings=[('/model/krytn/cmd_vel','/cmd_vel')]
     )

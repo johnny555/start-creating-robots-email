@@ -32,6 +32,14 @@
     <!-- Gazebo specific plugins-->
     <gazebo >
 
+        <plugin filename="libignition-gazebo-detachable-joint-system.so" name="ignition::gazebo::systems::DetachableJoint">
+            <parent_link>base_footprint</parent_link>
+            <child_model>Coke</child_model>
+            <child_link>body</child_link>
+            <detach_topic>/coke/detach</detach_topic>
+            <attach_topic>/coke/attach</attach_topic>
+        </plugin>
+
         <xacro:if value="$(arg with_sensors)">
             <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
                 <render_engine>ogre2</render_engine>
