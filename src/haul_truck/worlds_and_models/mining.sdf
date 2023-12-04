@@ -66,56 +66,6 @@
       <pose>0 0 0 0 -0 0</pose>
       <self_collide>false</self_collide>
     </model>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/polaris ranger ev/4</uri>
-      <name>polaris_ranger_ev</name>
-      <pose>0.966843 -0.485205 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction cone/3</uri>
-      <name>Construction Cone</name>
-      <pose>3.17696 -4.14751 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction cone/3</uri>
-      <name>Construction Cone_0</name>
-      <pose>7.89913 -3.78768 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction cone/3</uri>
-      <name>Construction Cone_1</name>
-      <pose>5.29674 4.03364 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction cone/3</uri>
-      <name>Construction Cone_2</name>
-      <pose>0.658673 2.83817 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/oak tree/7</uri>
-      <name>Oak tree</name>
-      <pose>7.16724 -6.32811 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/oak tree/7</uri>
-      <name>Oak tree_0</name>
-      <pose>5.07156 6.62618 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/cutout wall/2</uri>
-      <name>cutout_wall</name>
-      <pose>-3.6128 6.97242 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/cutout wall/2</uri>
-      <name>cutout_wall_0</name>
-      <pose>-2.86185 -7.59112 0 0 -0 0</pose>
-    </include>
-    <include>
-      <uri>file:///home/ros/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/cutout wall/2</uri>
-      <name>cutout_wall_1</name>
-      <pose>-8.01765 -3.39298 0.004931 -0.001621 -0.032168 -1.52044</pose>
-    </include>
     <light name='sun' type='directional'>
       <pose>0 0 10 0 -0 0</pose>
       <cast_shadows>true</cast_shadows>

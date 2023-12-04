@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="krytn">
-
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
     <xacro:arg name="with_sensors" default="true" />
 
     <!-- Include the robot base. Configure it with a differential drive control plugin -->
@@ -19,6 +21,8 @@
                 <geometry>
                     <mesh filename="file://$(find start_creating_robots)/worlds_and_models/krytn/meshes/krytn_top-part.dae"/>
                 </geometry>
+                <material name="blue" />
+
             </visual>
         </link>
 
@@ -27,6 +31,7 @@
             <child link="krytn_top" />
             <origin xyz="0.05 0 0.26" rpy="0 0 1.57" />
         </joint>
+
     </xacro:if>
 
     <!-- Gazebo specific plugins-->
