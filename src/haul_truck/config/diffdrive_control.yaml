@@ -11,11 +11,11 @@ controller_manager:
 diff_drive_base_controller:
   ros__parameters:
     left_wheel_names: ["front_left_wheel_joint", "rear_left_wheel_joint"]
-    right_wheel_names: ["front_right_wheel_joint", "rear_left_wheel_joint"]
+    right_wheel_names: ["front_right_wheel_joint", "rear_right_wheel_joint"]
 
     wheel_separation: 6.4
-    #wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
-    wheel_radius: 1
+    wheels_per_side: 2
+    wheel_radius: 1.0
 
     wheel_separation_multiplier: 1.0
     left_wheel_radius_multiplier: 1.0
