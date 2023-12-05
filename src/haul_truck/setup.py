@@ -17,7 +17,8 @@ setup(
         (join('share', package_name, 'worlds_and_models/haul_truck/meshes'), 
                 glob('worlds_and_models/haul_truck/meshes/*.dae')),
         (join('share', package_name, 'worlds_and_models'), glob('worlds_and_models/*.*')),
-
+        (join('share', package_name, 'worlds_and_models/haul_truck/materials/textures/'), 
+                glob('worlds_and_models/haul_truck/materials/textures/*.png')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

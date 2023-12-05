@@ -49,6 +49,15 @@ def generate_launch_description():
         output="both"
     )
 
+        # Extended Gazebo Bridge: To do mapping requires alot more info from the simulation. We need sensor data and estimates of the robot joint positions.
+    extended_bridge = Node(package='ros_gz_bridge', name="extended_gazebo_bridge", executable='parameter_bridge', 
+    arguments=[
+                   '/lidar@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
+                   '/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+                   '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+                   output='screen', 
+    )
+
 
     # A gui tool for easy tele-operation.
     robot_steering = Node(
@@ -56,4 +65,4 @@ def generate_launch_description():
         executable="rqt_robot_steering",
     )
 
-    return LaunchDescription([gazebo_sim, robot, robot_steering, robot_state_publisher])
+    return LaunchDescription([gazebo_sim, robot, robot_steering, robot_state_publisher, extended_bridge])
