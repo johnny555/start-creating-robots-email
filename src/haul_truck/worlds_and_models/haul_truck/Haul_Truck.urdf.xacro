@@ -158,27 +158,49 @@
     <xacro:sphere_inertial radius="1" mass="2000" />
 
   </link>
+
+  <link name="front_left_steering_link">
+    <xacro:box_inertial x="0.1" y="1" z="0.1" mass="1"/>
+  </link>
+  <link name="front_right_steering_link">
+    <xacro:box_inertial x="0.1" y="1" z="0.1" mass="1"/>
+  </link>
+  <joint name="front_left_steering_joint" type="revolute">
+    <parent link="chassis_link" />
+    <child link="front_left_steering_link" />
+    <axis xyz="0 0 1"/>
+    <origin xyz="2.8 3.2 0.0" rpy="0.0 -0.0 0.0"/>
+    <limit lower="-0.8727" upper="0.8727" effort="1000" velocity="1000.00"/>
+
+  </joint>
+  <joint name="front_right_steering_joint" type="revolute">
+    <parent link="chassis_link" />
+    <child link="front_right_steering_link" />
+    <origin xyz="-2.8 3.2 0.0" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.8727" upper="0.8727" effort="1000" velocity="1000.00"/>
+  </joint>
+
+
   <joint name="tray_joint" type="fixed">
     <parent link="chassis_link"/>
     <child link="tray_link"/>
     <origin xyz="-3.6 0.1 4.2" rpy="0.0 -0.0 0.0"/>
   </joint>
   <joint name="front_left_wheel_joint" type="continuous">
-    <parent link="chassis_link"/>
+    <parent link="front_left_steering_link"/>
     <child link="front_left_wheel_link"/>
-    <origin xyz="2.8 3.2 0.0" rpy="0.0 -0.0 0.0"/>
     <axis xyz="1 0 0"/>
   </joint>
   <joint name="front_right_wheel_joint" type="continuous">
-    <parent link="chassis_link"/>
+    <parent link="front_right_steering_link"/>
     <child link="front_right_wheel_link"/>
-    <origin xyz="-4.0 3.2 0.0" rpy="0.0 -0.0 0.0"/>
     <axis xyz="1 0 0"/>
   </joint>
   <joint name="rear_left_wheel_joint" type="continuous">
     <parent link="chassis_link"/>
     <child link="rear_left_wheel_link"/>
-    <origin xyz="2.8 9.3 0.0" rpy="0.0 -0.0 0.0"/>
+    <origin xyz="4.0 9.3 0.0" rpy="0.0 -0.0 0.0"/>
     <axis xyz="1 0 0"/>
   </joint>
   <joint name="rear_right_wheel_joint" type="continuous">
@@ -201,6 +223,20 @@
     <hardware>
       <plugin>ign_ros2_control/IgnitionSystem</plugin>
     </hardware>
+    <joint name="front_left_steering_wheel_joint">
+      <command_interface name="position">
+        <param name="min">-0.8727</param>
+        <param name="max">0.8727</param>
+      </command_interface>
+      <state_interface name="position"/>
+    </joint>
+    <joint name="front_right_steering_wheel_joint">
+      <command_interface name="position">
+        <param name="min">-0.8727</param>
+        <param name="max">0.8727</param>
+      </command_interface>
+      <state_interface name="position"/>
+    </joint>
     <joint name="front_left_wheel_joint">
       <command_interface name="velocity">
         <param name="min">-1</param>
@@ -235,8 +271,8 @@
     </joint>
   </ros2_control>
 
+
   <gazebo>
-    <!-- Joint state publisher -->
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
       <parameters>$(find haul_truck)/config/diffdrive_control.yaml</parameters>
     </plugin>
