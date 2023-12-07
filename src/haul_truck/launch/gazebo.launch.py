@@ -20,7 +20,7 @@ def generate_launch_description():
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
     
     gazebo_sim = IncludeLaunchDescription(path,
-                                          launch_arguments=[("gz_args", '-r ' + cafe_world_uri)])
+                                          launch_arguments=[("gz_args",  cafe_world_uri)])
 
     # Create a robot in the world.
     # Steps: 
@@ -44,7 +44,7 @@ def generate_launch_description():
 
     # Step 3. Spawn a robot in gazebo by listening to the published topic.
     robot = ExecuteProcess(
-        cmd=["ros2", "run", "ros_gz_sim", "create", "-topic", "robot_description", "-z", "3.5"],
+        cmd=["ros2", "run", "ros_gz_sim", "create", "-topic", "robot_description", "-z", "1.5"],
         name="spawn robot",
         output="both"
     )
@@ -54,7 +54,9 @@ def generate_launch_description():
     arguments=[
                    '/lidar@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
                    '/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-                   '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+                   '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+                   '/rock/detach@std_msgs/msg/Empty@gz.msgs.Empty',
+                   '/rock/attach@std_msgs/msg/Empty@gz.msgs.Empty',],
                    output='screen', 
     )
 

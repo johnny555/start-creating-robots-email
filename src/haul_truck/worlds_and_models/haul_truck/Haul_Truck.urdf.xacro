@@ -23,9 +23,9 @@
       <!--Chassis/Body.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Body.dae"/>
       </geometry>
-      <material name="orange" />
+
     </visual>
     <collision>
       <!--real_chassis_link_.Body_bbox-->
@@ -37,7 +37,7 @@
         <mu>0.1</mu>
       </gazebo>
     </collision>
-    <xacro:box_inertial_with_origin x="8" y="10" z="3" mass="100000">
+    <xacro:box_inertial_with_origin x="8" y="10" z="3" mass="100">
       <origin xyz="0 5 0" rpy="0 0 0" />
     </xacro:box_inertial_with_origin>
   </link>
@@ -50,26 +50,27 @@
       </geometry>
       <material name="red" />
     </visual>
+    <!-- 
     <collision>
-      <!--real_tray_link_.Body002_bbox-->
-      <origin xyz="0.219 7.17182 5.93052" rpy="0.0 -0.0 0.0"/>
+      <origin xyz="3.5 7 0 " rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <box size="7.638000000000004 13.858283829000012 3.4610417480000075"/>
+        <box size="7.638000000000004 13.858283829000012 1.4610417480000075"/>
       </geometry>
       <gazebo>
         <mu>0.1</mu>
       </gazebo>
     </collision>
-    <xacro:box_inertial_with_origin x="8" y="10" z="1" mass="10000">
+    <xacro:box_inertial_with_origin x="8" y="10" z="1" mass="1">
       <origin xyz="0 -5 0" rpy="0 0 0" />
     </xacro:box_inertial_with_origin>
+  -->
   </link>
   <link name="front_left_wheel_link">
     <visual>
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Body001.dae"/>
       </geometry>
       <material name="black" />
     </visual>
@@ -77,12 +78,14 @@
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Pad012.dae"/>
       </geometry>
     </collision>
-    <xacro:sphere_inertial radius="1" mass="2000" />
+    <xacro:cylinder_inertial_with_origin radius="1" length="0.5" mass="2">
+      <origin rpy="0 0 0.57"/>
+    </xacro:cylinder_inertial_with_origin>
     <gazebo>
-      <mu>0.3</mu>
+      <mu>0.7</mu>
       <minDepth>0.02</minDepth>
     </gazebo>
   </link>
@@ -91,7 +94,7 @@
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Body001.dae"/>
       </geometry>
       <material name="black" />
 
@@ -100,22 +103,23 @@
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Pad012.dae"/>
       </geometry>
       <gazebo>
-        <mu>0.3</mu>
+        <mu>0.7</mu>
         <minDepth>0.02</minDepth>
       </gazebo>
     </collision>
-    <xacro:sphere_inertial radius="1" mass="2000" />
-
+    <xacro:cylinder_inertial_with_origin radius="1" length="0.5" mass="2">
+      <origin rpy="0 0 0.57"/>
+    </xacro:cylinder_inertial_with_origin>
   </link>
   <link name="rear_left_wheel_link">
     <visual>
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Body001.dae"/>
       </geometry>
       <material name="black" />
 
@@ -124,14 +128,14 @@
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Pad012.dae"/>
       </geometry>
       <gazebo>
-        <mu>0.3</mu>
+        <mu>0.7</mu>
         <minDepth>0.02</minDepth>
       </gazebo>
     </collision>
-    <xacro:sphere_inertial radius="1" mass="2000" />
+    <xacro:sphere_inertial radius="1" mass="2" />
 
   </link>
   <link name="rear_right_wheel_link">
@@ -139,7 +143,7 @@
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Body001.dae"/>
       </geometry>
       <material name="black" />
 
@@ -148,14 +152,14 @@
       <!--Wheel/Body001.-->
       <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <mesh filename="package://haul_truck/meshes/Unnamed_Body001.dae"/>
+        <mesh filename="package://haul_truck/meshes/safeai_Pad012.dae"/>
       </geometry>
       <gazebo>
-        <mu>0.3</mu>
+        <mu>0.7</mu>
         <minDepth>0.02</minDepth>
       </gazebo>
     </collision>
-    <xacro:sphere_inertial radius="1" mass="2000" />
+    <xacro:sphere_inertial radius="1" mass="2" />
 
   </link>
 
@@ -169,23 +173,23 @@
     <parent link="chassis_link" />
     <child link="front_left_steering_link" />
     <axis xyz="0 0 1"/>
-    <origin xyz="2.8 3.2 0.0" rpy="0.0 -0.0 0.0"/>
-    <limit lower="-0.8727" upper="0.8727" effort="1000" velocity="1000.00"/>
+    <origin xyz="2.8 3.2 0.6" rpy="0.0 -0.0 0.0"/>
+    <limit lower="-0.4" upper="0.4" effort="10000000" velocity="1000.00"/>
 
   </joint>
   <joint name="front_right_steering_joint" type="revolute">
     <parent link="chassis_link" />
     <child link="front_right_steering_link" />
-    <origin xyz="-2.8 3.2 0.0" rpy="0.0 -0.0 0.0"/>
+    <origin xyz="-4.0 3.2 0.6" rpy="0.0 -0.0 0.0"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-0.8727" upper="0.8727" effort="1000" velocity="1000.00"/>
+    <limit lower="-0.4" upper="0.4" effort="10000000" velocity="1000.00"/>
   </joint>
 
 
   <joint name="tray_joint" type="fixed">
     <parent link="chassis_link"/>
     <child link="tray_link"/>
-    <origin xyz="-3.6 0.1 4.2" rpy="0.0 -0.0 0.0"/>
+    <origin xyz="-3.8 1.0 3.1" rpy="0.0 -0.0 0.0"/>
   </joint>
   <joint name="front_left_wheel_joint" type="continuous">
     <parent link="front_left_steering_link"/>
@@ -200,13 +204,13 @@
   <joint name="rear_left_wheel_joint" type="continuous">
     <parent link="chassis_link"/>
     <child link="rear_left_wheel_link"/>
-    <origin xyz="4.0 9.3 0.0" rpy="0.0 -0.0 0.0"/>
+    <origin xyz="2.8 9.3 0.6" rpy="0.0 -0.0 0.0"/>
     <axis xyz="1 0 0"/>
   </joint>
   <joint name="rear_right_wheel_joint" type="continuous">
     <parent link="chassis_link"/>
     <child link="rear_right_wheel_link"/>
-    <origin xyz="-4.0 9.3 0.0" rpy="0.0 -0.0 0.0"/>
+    <origin xyz="-4.0 9.3 0.6" rpy="0.0 -0.0 0.0"/>
     <axis xyz="1 0 0"/>
   </joint>
 
@@ -216,42 +220,30 @@
     <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
+
+
+
   </gazebo>
+
 
 
   <ros2_control name="GazeboSystem" type="system">
     <hardware>
       <plugin>ign_ros2_control/IgnitionSystem</plugin>
     </hardware>
-    <joint name="front_left_steering_wheel_joint">
+    <joint name="front_left_steering_joint">
       <command_interface name="position">
         <param name="min">-0.8727</param>
         <param name="max">0.8727</param>
       </command_interface>
       <state_interface name="position"/>
     </joint>
-    <joint name="front_right_steering_wheel_joint">
+    <joint name="front_right_steering_joint">
       <command_interface name="position">
         <param name="min">-0.8727</param>
         <param name="max">0.8727</param>
       </command_interface>
       <state_interface name="position"/>
-    </joint>
-    <joint name="front_left_wheel_joint">
-      <command_interface name="velocity">
-        <param name="min">-1</param>
-        <param name="max">1</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="front_right_wheel_joint">
-      <command_interface name="velocity">
-        <param name="min">-1</param>
-        <param name="max">1</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
     </joint>
     <joint name="rear_left_wheel_joint">
       <command_interface name="velocity">
@@ -274,8 +266,9 @@
 
   <gazebo>
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-      <parameters>$(find haul_truck)/config/diffdrive_control.yaml</parameters>
+      <parameters>$(find haul_truck)/config/ackermann_control.yaml</parameters>
     </plugin>
   </gazebo>
+
 
 </robot>

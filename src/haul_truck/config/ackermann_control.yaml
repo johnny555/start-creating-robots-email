@@ -10,22 +10,38 @@ controller_manager:
 
 ackermann_steering_controller:
   ros__parameters:
+    reference_timeout: 2.0
     front_steering: true
-    front_wheel_names:
-      ["front_left_steering_wheel_joint", "front_right_steering_wheel_joint"]
-    rear_wheels_names: ["rear_left_wheel_joint", "rear_right_wheel_joint"]
+    open_loop: false
+    velocity_rolling_window_size: 5
+    position_feedback: false
+    use_stamped_vel: false
+    rear_wheels_names: [rear_right_wheel_joint, rear_left_wheel_joint]
+    front_wheels_names: [front_right_steering_joint, front_left_steering_joint]
 
-    front_wheel_track_length: 5.6
+    wheelbase: 6.13
+    front_wheel_track: 6.4
+    rear_wheel_track: 6.8
+    front_wheels_radius: 1.0
+    rear_wheels_radius: 1.0
 
-    rear_wheel_track_length: 8.0
+    # Velocity and acceleration limits
+    # Whenever a min_* is unspecified, default to -max_*
+    linear.x.has_velocity_limits: true
+    linear.x.has_acceleration_limits: true
+    linear.x.has_jerk_limits: false
+    linear.x.max_velocity: 1.0
+    linear.x.min_velocity: -1.0
+    linear.x.max_acceleration: 1.0
+    linear.x.max_jerk: 0.0
+    linear.x.min_jerk: 0.0
 
-    wheelbase: 6.1
-
-    front_wheel_radius: 1.0
-
-    rear_wheel_radius: 1.0
-
-    base_frame_id: chassis
-    odom_frame_id: odom
-
-    update_rate: 50 # Hz
+    angular.z.has_velocity_limits: true
+    angular.z.has_acceleration_limits: true
+    angular.z.has_jerk_limits: false
+    angular.z.max_velocity: 1.0
+    angular.z.min_velocity: -1.0
+    angular.z.max_acceleration: 1.0
+    angular.z.min_acceleration: -1.0
+    angular.z.max_jerk: 0.0
+    angular.z.min_jerk: 0.0

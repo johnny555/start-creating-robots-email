@@ -15,12 +15,18 @@ setup(
         (join('share', package_name, 'launch'), glob('launch/*launch.py')),
         (join('share', package_name, 'worlds_and_models/haul_truck'), glob('worlds_and_models/haul_truck/*.*')),
         (join('share', package_name, 'worlds_and_models/haul_truck/meshes'), 
-                glob('worlds_and_models/haul_truck/meshes/*.dae')),
+                glob('worlds_and_models/haul_truck/meshes/*.*')),
         (join('share', package_name, 'worlds_and_models'), glob('worlds_and_models/*.*')),
         (join('share', package_name, 'worlds_and_models/haul_truck/materials/textures/'), 
                 glob('worlds_and_models/haul_truck/materials/textures/*.png')),
         (join('share', package_name, 'config'), glob('config/*.yaml')),
-        
+
+        (join('share', package_name, 'worlds_and_models/falling_rock1'), glob('worlds_and_models/falling_rock1/*.*')),        
+        (join('share', package_name, 'worlds_and_models/falling_rock1/meshes'), 
+                glob('worlds_and_models/falling_rock1/meshes/*.*')),
+        (join('share', package_name, 'worlds_and_models/falling_rock1/materials/textures/'), 
+                glob('worlds_and_models/falling_rock1/materials/textures/*.jpg')),
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
