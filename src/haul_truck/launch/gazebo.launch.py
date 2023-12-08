@@ -57,8 +57,15 @@ def generate_launch_description():
                    '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
                    '/rock/detach@std_msgs/msg/Empty@gz.msgs.Empty',
                    '/rock/attach@std_msgs/msg/Empty@gz.msgs.Empty',
-                   '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'],
-                   output='screen', 
+                   '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
+                   '/model/haul_truck/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+                   '/model/haul_truck/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+                   '/model/haul_truck/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',],
+                   output='screen',
+                   remappings=[('/model/haul_truck/cmd_vel','/cmd_vel'),
+                               ('/model/haul_truck/odometry','/odom'),
+                                ('/model/haul_truck/tf','/tf')]
+ 
     )
 
 
@@ -76,7 +83,7 @@ def generate_launch_description():
 
     load_joint_trajectory_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'ackermann_steering_controller'],
+             'diff_drive_base_controller'],
         output='screen'
     )
 

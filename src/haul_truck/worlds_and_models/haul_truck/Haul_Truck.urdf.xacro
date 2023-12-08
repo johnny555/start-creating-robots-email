@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Haul Truck">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="haul_truck">
   <material name="red">
     <color rgba="0.816 0.157 0.09 1"/>
   </material>
@@ -28,19 +28,26 @@
         <geometry>
           <mesh filename="file://$(find haul_truck)/worlds_and_models/haul_truck/meshes/safeai_Pad012.dae"/>
         </geometry>
-        <mu>1.0</mu>
-        <mu2>1.0</mu2>
-        <fdir1>0 0 1</fdir1>
-        <slip1>1.0</slip1>
-        <slip2>1.0</slip2>
-        <min_depth>0.5</min_depth>
-        <kp>1e8</kp>
 
       </collision>
       <xacro:sphere_inertial radius="1" mass="0.2" />
     </link>
 
-
+    <gazebo reference="${name}">
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+            <fdir1>0 0 1</fdir1>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+            <min_depth>0.5</min_depth>
+            <kp>1e8</kp>
+          </ode>
+        </friction>
+      </surface>
+    </gazebo>
   </xacro:macro>
 
   <link name="base_footprint" />
@@ -119,7 +126,7 @@
     <origin xyz="-3.8 1.0 3.1" rpy="0.0 -0.0 0.0"/>
   </joint>
 
-  <xacro:if value="True">
+  <xacro:if value="False">
     <link name="front_left_steering_link">
       <xacro:box_inertial x="0.1" y="1" z="0.1" mass="1"/>
     </link>
@@ -156,7 +163,7 @@
 
   </xacro:if>
 
-  <xacro:if value="False">
+  <xacro:if value="True">
 
 
     <joint name="front_left_wheel_joint" type="continuous">
@@ -200,6 +207,10 @@
       <render_engine>ogre2</render_engine>
     </plugin>
 
+    <!-- Publish joints for robot description tf publisher. -->
+    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+    </plugin>
 
 
   </gazebo>
@@ -210,7 +221,7 @@
     <hardware>
       <plugin>ign_ros2_control/IgnitionSystem</plugin>
     </hardware>
-    <xacro:if value="True">
+    <xacro:if value="False">
       <joint name="front_left_steering_joint">
         <command_interface name="position">
           <param name="min">-0.2</param>
@@ -228,34 +239,34 @@
       <!-- Adding front wheel state interfaces so that their position is given to ros -->
       <joint name="front_left_wheel_joint">
         <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max">1</param>
+          <param name="min">-0.2</param>
+          <param name="max">0.2</param>
         </command_interface>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
       <joint name="front_right_wheel_joint">
         <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max">1</param>
+          <param name="min">-0.2</param>
+          <param name="max">0.2</param>
         </command_interface>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
     </xacro:if>
-    <xacro:if value="False">
+    <xacro:if value="True">
       <joint name="front_left_wheel_joint">
         <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max">1</param>
+          <param name="min">-0.2</param>
+          <param name="max">0.2</param>
         </command_interface>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
       </joint>
       <joint name="front_right_wheel_joint">
         <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max">1</param>
+          <param name="min">-0.2</param>
+          <param name="max">0.2</param>
         </command_interface>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
@@ -263,16 +274,16 @@
     </xacro:if>
     <joint name="rear_left_wheel_joint">
       <command_interface name="velocity">
-        <param name="min">-1</param>
-        <param name="max">1</param>
+        <param name="min">-0.2</param>
+        <param name="max">0.2</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
     <joint name="rear_right_wheel_joint">
       <command_interface name="velocity">
-        <param name="min">-1</param>
-        <param name="max">1</param>
+        <param name="min">-0.2</param>
+        <param name="max">0.2</param>
       </command_interface>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -280,19 +291,17 @@
 
   </ros2_control>
 
-
   <gazebo>
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-
       <ros>
-        <remapping>/ackermann_steering_controller/odometry:=odom</remapping>
-        <remapping>/ackermann_steering_controller/tf_odometry:=tf</remapping>
-        <remapping>/ackermann_steering_controller/reference_unstamped:=cmd_vel</remapping>
+        <remapping>/diff_drive_base_controller/odometry:=odom</remapping>
+        <remapping>/diff_drive_base_controller/tf_odometry:=tf</remapping>
+        <remapping>/diff_drive_base_controller/cmd_vel_unstamped:=cmd_vel</remapping>
       </ros>
-      <parameters>$(find haul_truck)/config/ackermann_control.yaml</parameters>
-      <!-- Remapping topics so that mapping system works! -->
-
+      <parameters>$(find haul_truck)/config/diffdrive_control.yaml</parameters>
     </plugin>
+    <!-- Remapping topics so that mapping system works! -->
+
   </gazebo>
 
 

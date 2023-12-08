@@ -21,8 +21,8 @@
   <joint name="lidar_joint" type="fixed">
     <parent link="chassis_link" />
     <child link="lidar_3d_v1" />
-    <!--    <origin rpy="0 0 0" xyz="-1 0 6"/> -->
-    <origin xyz="0.0 0.8 5.7" rpy="0.0 -0.0 -1.57"/>
+    <!--    <origin rpy="0 0 0" xyz="0 0.8 5.6"/> -->
+    <origin xyz="0.0 0.8 8.0" rpy="0.0 -0.0 -1.57"/>
 
   </joint>
 
@@ -37,8 +37,8 @@
           <horizontal>
             <samples>60</samples>
             <resolution>1</resolution>
-            <min_angle>-1.41</min_angle>
-            <max_angle>1.14</max_angle>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
           </horizontal>
           <!-- Removing vertical to make slam easier. 
           <vertical>
