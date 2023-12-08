@@ -75,25 +75,25 @@
     <include>
       <uri>file:///workspace/install/haul_truck/share/haul_truck/worlds_and_models//falling_rock1</uri>
       <name>falling_rock1</name>
-      <pose>-0.491067 7.22518 9.10129 0 -0 0</pose>
+      <pose>-7.83267 -1.47656 7.87878 -4e-06 -1e-06 -0</pose>
     </include>
     <include>
       <uri>file:///workspace/install/haul_truck/share/haul_truck/worlds_and_models//falling_rock1</uri>
       <name>falling_rock2</name>
-      <pose>-2.86108 7.22518 9.10129 0 -0 0</pose>
+      <pose>-7.05412 0.226472 7.87879 -4e-06 -2e-06 -0</pose>
     </include>
     <include>
       <uri>file:///workspace/install/haul_truck/share/haul_truck/worlds_and_models//falling_rock1</uri>
       <name>falling_rock3</name>
-      <pose>2.40704 7.22518 9.10129 0 -0 0</pose>
+      <pose>-5.9407 1.70346 7.87878 -4e-06 0 0</pose>
     </include>
     <include>
       <uri>file:///workspace/install/haul_truck/share/haul_truck/worlds_and_models//falling_rock1</uri>
       <name>falling_rock4</name>
-      <pose>-0.491067 9.12462 9.10129 0 -0 0</pose>
+      <pose>-7.77585 1.86198 7.87878 -5e-06 -1e-06 -0</pose>
     </include>
     <model name='box1'>
-      <pose>-85.6717 -173.526 0.5 0 0 -0.727124</pose>
+      <pose>-85.6717 -173.526 0.525908 0 0 -0.727124</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -140,7 +140,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box2'>
-      <pose>-15.63 60.313 10 0 -0 0</pose>
+      <pose>-15.633 60.3132 9.99996 0 -3.5e-05 -5.3e-05</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -187,7 +187,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box3'>
-      <pose>-57.6092 -14.1031 10 0 -0 2.09742</pose>
+      <pose>-57.6012 -14.1208 10.0001 -0 -0.000435 2.09714</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -234,7 +234,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box4'>
-      <pose>16.7695 33.216 10.3085 0 -0 0</pose>
+      <pose>16.7669 33.2162 9.99996 0 -1.9e-05 -6.1e-05</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -281,7 +281,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box5'>
-      <pose>-3.43835 -24.8711 10 0 0 -1.21484</pose>
+      <pose>-3.4323 -24.8977 10.0002 -0 0.000453 -1.21514</pose>
       <link name='box_link'>
         <inertial>
           <inertia>

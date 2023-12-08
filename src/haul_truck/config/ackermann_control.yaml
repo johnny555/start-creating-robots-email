@@ -10,13 +10,19 @@ controller_manager:
 
 ackermann_steering_controller:
   ros__parameters:
-    reference_timeout: 0.0
+    reference_timeout: 2.0
     front_steering: true
-    open_loop: false
+    open_loop: true
     velocity_rolling_window_size: 5
     position_feedback: true
     use_stamped_vel: false
-    rear_wheels_names: [rear_right_wheel_joint, rear_left_wheel_joint]
+    rear_wheels_names:
+      [
+        rear_right_wheel_joint,
+        rear_left_wheel_joint,
+        front_right_wheel_joint,
+        front_left_wheel_joint,
+      ]
     front_wheels_names: [front_right_steering_joint, front_left_steering_joint]
 
     wheelbase: 6.13

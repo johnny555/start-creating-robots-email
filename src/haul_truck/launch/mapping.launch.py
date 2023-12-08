@@ -50,7 +50,14 @@ def generate_launch_description():
             name='pointcloud_to_laserscan'
         )
 
+
+    static_tf = Node(package='tf2_ros', 
+                                 executable='static_transform_publisher', 
+                                 name='base_fp_linkTF', 
+                                 output='log', 
+                                 arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'lidar_3d_v1',  'haul_truck/base_footprint/lidar_3d_v1', ])
+
     return LaunchDescription([gazebo,                              
                                 slam_toolbox, 
                                 rviz, 
-                                rviz_config_arg, pt_to_ls])
+                                rviz_config_arg, pt_to_ls, static_tf])
