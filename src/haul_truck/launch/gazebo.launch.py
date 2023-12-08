@@ -53,10 +53,11 @@ def generate_launch_description():
     extended_bridge = Node(package='ros_gz_bridge', name="extended_gazebo_bridge", executable='parameter_bridge', 
     arguments=[
                    '/lidar@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
-                   '/lidar/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+                   '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
                    '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
                    '/rock/detach@std_msgs/msg/Empty@gz.msgs.Empty',
-                   '/rock/attach@std_msgs/msg/Empty@gz.msgs.Empty',],
+                   '/rock/attach@std_msgs/msg/Empty@gz.msgs.Empty',
+                   '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'],
                    output='screen', 
     )
 
@@ -75,7 +76,7 @@ def generate_launch_description():
 
     load_joint_trajectory_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'ackermann_steering_controller'],
+             'diff_drive_base_controller'],
         output='screen'
     )
 

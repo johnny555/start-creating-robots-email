@@ -28,28 +28,30 @@
 
 
   <gazebo reference="lidar_3d_v1">
-    <sensor name="lidar_2d_v1" type="gpu_ray">
+    <sensor name="lidar_3d_v1" type="gpu_ray">
       <topic>lidar</topic>
-      <ignition_frame_id>lidar_2d_v1</ignition_frame_id>
+      <ignition_frame_id>lidar_3d_v1</ignition_frame_id>
       <pose>0 0 0.0525045525 0 0 0</pose>
       <ray>
         <scan>
           <horizontal>
-            <samples>45</samples>
+            <samples>60</samples>
             <resolution>1</resolution>
-            <min_angle>-0.7</min_angle>
-            <max_angle>0.7</max_angle>
+            <min_angle>-1.41</min_angle>
+            <max_angle>1.14</max_angle>
           </horizontal>
+          <!-- Removing vertical to make slam easier. 
           <vertical>
-            <samples>6</samples>
+            <samples>4</samples>
             <resolution>1</resolution>
             <min_angle>-0.52</min_angle>
             <max_angle>0</max_angle>
           </vertical>
+          -->
         </scan>
         <range>
           <min>0.060</min>
-          <max>30</max>
+          <max>100</max>
           <resolution>0.1</resolution>
         </range>
         <noise>
@@ -62,6 +64,7 @@
       <update_rate>10</update_rate>
       <visualize>true</visualize>
     </sensor>
+
   </gazebo>
 
 </robot>

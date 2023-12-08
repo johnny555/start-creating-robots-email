@@ -24,12 +24,18 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>1000 1000</size>
             </plane>
           </geometry>
           <surface>
             <friction>
-              <ode/>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 1</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
             </friction>
             <bounce/>
             <contact/>
@@ -134,7 +140,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box2'>
-      <pose>-33.7449 -18.3843 10 0 -0 0</pose>
+      <pose>-15.63 60.313 10 0 -0 0</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -181,7 +187,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box3'>
-      <pose>-80.538 -90.3846 10 0 -0 2.09742</pose>
+      <pose>-57.6092 -14.1031 10 0 -0 2.09742</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -228,7 +234,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box4'>
-      <pose>41.6001 -20.451 10.30847 0 -0 0</pose>
+      <pose>16.7695 33.216 10.3085 0 -0 0</pose>
       <link name='box_link'>
         <inertial>
           <inertia>
@@ -275,7 +281,7 @@
       <self_collide>false</self_collide>
     </model>
     <model name='box5'>
-      <pose>9.71398 -109.954 10 0 0 -1.21484</pose>
+      <pose>-3.43835 -24.8711 10 0 0 -1.21484</pose>
       <link name='box_link'>
         <inertial>
           <inertia>

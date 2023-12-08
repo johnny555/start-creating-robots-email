@@ -15,7 +15,7 @@ diff_drive_base_controller:
 
     wheel_separation: 6.4
     wheels_per_side: 2
-    wheel_radius: 1.0
+    wheel_radius: 2.0
 
     wheel_separation_multiplier: 1.0
     left_wheel_radius_multiplier: 1.0
@@ -23,11 +23,11 @@ diff_drive_base_controller:
 
     publish_rate: 50.0
     odom_frame_id: odom
-    base_frame_id: chassis
-    pose_covariance_diagonal: [0.001, 0.001, 0.0, 0.0, 0.0, 0.01]
-    twist_covariance_diagonal: [0.001, 0.0, 0.0, 0.0, 0.0, 0.01]
+    base_frame_id: base_footprint
+    #pose_covariance_diagonal: [0.1, 0.1, 0.1, 0.1, 0.1, 0.11]
+    #twist_covariance_diagonal: [0.001, 0.0, 0.0, 0.0, 0.0, 0.01]
 
-    open_loop: true
+    open_loop: false
     enable_odom_tf: true
 
     cmd_vel_timeout: 0.5
