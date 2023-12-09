@@ -159,8 +159,8 @@ local_costmap:
       width: 40.0
       height: 40.0
       resolution: 1.0
-      footprint: "[[0.13, 0.24], [0.13, -0.24], [-0.37, -0.24], [-0.37, 0.24]]"
-      plugins: ["voxel_layer", "inflation_layer"]
+      footprint: "[[4, 0], [-4, 0], [4, -15], [-4, 15]]"
+      plugins: ["inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
