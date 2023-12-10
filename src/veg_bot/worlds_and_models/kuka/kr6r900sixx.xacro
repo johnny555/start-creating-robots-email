@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="kuka_kr6"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find veg_bot)/worlds_and_models/kuka/kr6r900sixx_macro.xacro" />
+  <xacro:kuka_kr6r900sixx prefix=""/>
+</robot>
