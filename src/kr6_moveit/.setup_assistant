@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: veg_bot
+    relative_path: worlds_and_models/kuka/kr6r900sixx.xacro
+  srdf:
+    relative_path: config/kuka_kr6.srdf
+  package_settings:
+    author_name: John
+    author_email: john@soundelve.com
+    generated_timestamp: 1702372493
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kuka_kr6">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import kuka_kr6 urdf file -->
+    <xacro:include filename="$(find veg_bot)/worlds_and_models/kuka/kr6r900sixx.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="kuka_kr6.ros2_control.xacro" />
+
+
+    <xacro:kuka_kr6_ros2_control name="IgnitionSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

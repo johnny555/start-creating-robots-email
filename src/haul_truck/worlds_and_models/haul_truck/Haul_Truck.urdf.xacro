@@ -72,13 +72,13 @@
       <!--real_chassis_link_.Body_bbox-->
       <origin xyz="0.090073 5.25 3.35026" rpy="0.0 -0.0 0.0"/>
       <geometry>
-        <box size="7.6383887394832115 10.500000000000005 1.84423459552541"/>
+        <box size="7.6383887394832115 10.500000000000005 0.54423459552541"/>
       </geometry>
       <gazebo>
         <mu>0.1</mu>
       </gazebo>
     </collision>
-    <xacro:box_inertial_with_origin x="8" y="10" z="3" mass="100">
+    <xacro:box_inertial_with_origin x="8" y="4" z="3" mass="100">
       <origin xyz="0 5 0" rpy="0 0 0" />
     </xacro:box_inertial_with_origin>
   </link>
@@ -254,7 +254,7 @@
         <state_interface name="velocity"/>
       </joint>
     </xacro:if>
-    <xacro:if value="True">
+    <xacro:if value="False">
       <joint name="front_left_wheel_joint">
         <command_interface name="velocity">
           <param name="min">-0.2</param>

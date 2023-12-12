@@ -11,6 +11,8 @@ import xacro
 
 def generate_launch_description():
 
+    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
+
     # This allows us to have the with_sensors as an argument on the command line
     with_sensors_arg =  DeclareLaunchArgument(
         'with_sensors', default_value="false"
@@ -34,7 +36,10 @@ def generate_launch_description():
     # 3. Spawn a simulated robot in the gazebo simulation using the published robot description topic. 
 
     # Step 1. Process robot file. 
-    robot_file = join(models_path, "kuka","kr6r900sixx.xacro")
+    #robot_file = join(get_package_share_directory("veg_bot"), "worlds_and_models","kuka","kr6r900sixx.xacro")
+
+    robot_file = join(get_package_share_directory("kr6_moveit"), "config","kuka_kr6.urdf.xacro")
+
     robot_xml = Command(["xacro ",robot_file])
 
     #Step 2. Publish robot file to ros topic /robot_description
@@ -58,12 +63,10 @@ def generate_launch_description():
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-                   '/coke/detach@std_msgs/msg/Empty@gz.msgs.Empty',
-                   '/coke/attach@std_msgs/msg/Empty@gz.msgs.Empty',
+        arguments=[
+                  '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'
                    ],
         output='screen',
-        remappings=[('/model/krytn/cmd_vel','/cmd_vel')]
     )
 
     # A gui tool for easy tele-operation.
@@ -72,4 +75,26 @@ def generate_launch_description():
         executable="rqt_robot_steering",
     )
 
-    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, with_sensors_arg])
+    demo = IncludeLaunchDescription(join(get_package_share_directory("kr6_moveit"), "launch","demo.launch.py"), launch_arguments=[("use_sim_time",use_sim_time)])
+
+ 
+    sim_time = DeclareLaunchArgument(
+            'use_sim_time',
+            default_value=use_sim_time,
+            description='If true, use simulated clock')
+    
+    # Step 3. Spawn a robot in gazebo by listening to the published topic.
+    set_simtime_movegroup = ExecuteProcess(
+        cmd=["ros2", "param", "set", "/move_group","use_sim_time",  "True"],
+        name="move group sim time",
+        output="both"
+    )
+
+    # Step 3. Spawn a robot in gazebo by listening to the published topic.
+    set_simtime_rviz = ExecuteProcess(
+        cmd=["ros2", "param", "set", "/rviz","use_sim_time",  "True"],
+        name="move group sim time",
+        output="both"
+    )
+
+    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, with_sensors_arg, demo , sim_time, set_simtime_movegroup, set_simtime_rviz])
