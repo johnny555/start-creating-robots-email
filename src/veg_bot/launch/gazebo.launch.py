@@ -23,11 +23,11 @@ def generate_launch_description():
     models_path = join(get_package_share_directory("veg_bot"), "worlds_and_models")
 
     # Start a simulation with the cafe world
-    cafe_world_uri = join(models_path,"simple_cafe.sdf")
+    cafe_world_uri = join(models_path,"packing_world", "packing.sdf")
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
     
     gazebo_sim = IncludeLaunchDescription(path,
-                                          launch_arguments=[("gz_args", 'empty.sdf')])
+                                          launch_arguments=[("gz_args", cafe_world_uri)])
 
     # Create a robot in the world.
     # Steps: 
@@ -69,11 +69,7 @@ def generate_launch_description():
         output='screen',
     )
 
-    # A gui tool for easy tele-operation.
-    robot_steering = Node(
-        package="rqt_robot_steering",
-        executable="rqt_robot_steering",
-    )
+
 
     demo = IncludeLaunchDescription(join(get_package_share_directory("kr6_moveit"), "launch","demo.launch.py"), launch_arguments=[("use_sim_time",use_sim_time)])
 
@@ -97,4 +93,4 @@ def generate_launch_description():
         output="both"
     )
 
-    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, with_sensors_arg, demo , sim_time, set_simtime_movegroup, set_simtime_rviz])
+    return LaunchDescription([gazebo_sim, bridge, robot,  robot_state_publisher, with_sensors_arg, demo , sim_time, set_simtime_movegroup, set_simtime_rviz])

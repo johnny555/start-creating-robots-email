@@ -1,0 +1,255 @@
+<sdf version='1.9'>
+  <world name='empty'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='ignition-gazebo-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='ignition-gazebo-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='ignition-gazebo-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='ignition-gazebo-contact-system'/>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='conveyor_tray'>
+      <link name='conveyor_base_link'>
+        <pose>0 0 0 0 -0 0</pose>
+        <visual name='conveyor_tray_viz'>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///workspace/install/veg_bot/share/veg_bot/worlds_and_models/packing_world/meshes/fruit_box-conveyor_tray.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.632353 0.588235 0.485294 1</diffuse>
+            <ambient>0.632353 0.588235 0.485294 1</ambient>
+          </material>
+        </visual>
+        <collision name='conveyor_base_collision'>
+          <pose>0.5 1 -.6 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1 2 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0.5 0.2 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='conveyor_top_collision'>
+          <pose>0.5 1 -.10 0 0.3 0</pose>
+          <geometry>
+            <box>
+              <size>1 2 0.01</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0.5 0.2 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-0.44644 1.58939 0.649999 -0 0 -1.66972</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lemon'>
+      <pose>0.784838 0.824699 0.564466 0.298627 -0.029107 -0.004662</pose>
+      <link name='link'>
+        <inertial>
+          <inertia>
+            <ixx>3.4108600000000003e-08</ixx>
+            <ixy>-1.4026000000000001e-24</ixy>
+            <ixz>-6.6573699999999997e-24</ixz>
+            <iyy>3.3937199999999999e-08</iyy>
+            <iyz>4.2765699999999998e-24</iyz>
+            <izz>2.7857700000000001e-08</izz>
+          </inertia>
+          <mass>9.6834499999999996e-05</mass>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///workspace/install/veg_bot/share/veg_bot/worlds_and_models/packing_world/meshes/textured.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='packing_box'>
+      <link name='packing_box_link'>
+        <pose>0 0 1 0 -0 0</pose>
+        <visual name='packing_box_viz'>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///workspace/install/veg_bot/share/veg_bot/worlds_and_models/packing_world/meshes/fruit_box-PartBody.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.632353 0.588235 0.485294 1</diffuse>
+            <ambient>0.632353 0.588235 0.485294 1</ambient>
+          </material>
+        </visual>
+        <collision name='pack_collision'>
+          <pose>0.2 0.2 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.6 0.6 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0.3 0.3 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0.010666 -0.896852 -0.950001 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.1 -0.9</direction>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
