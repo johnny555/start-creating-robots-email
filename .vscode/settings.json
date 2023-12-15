@@ -11,6 +11,6 @@
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "python.formatting.provider": "none",
-    "ros.rosSetupScript": "/workspace/install/setup.bash",
+    "ros.rosSetupScript": "/workspace/install/local_setup.bash",
     "ros.distro": "humble"
 }

@@ -64,14 +64,16 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-                  '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'
+                  '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+                   '/lemon/detach@std_msgs/msg/Empty@gz.msgs.Empty',
+                   '/lemon/attach@std_msgs/msg/Empty@gz.msgs.Empty',
                    ],
         output='screen',
     )
 
 
-
-    demo = IncludeLaunchDescription(join(get_package_share_directory("kr6_moveit"), "launch","demo.launch.py"), launch_arguments=[("use_sim_time",use_sim_time)])
+    demo = IncludeLaunchDescription(join(get_package_share_directory("kr6_moveit"), "launch","demo.launch.py"), 
+                                    launch_arguments=[("use_sim_time",use_sim_time)])
 
  
     sim_time = DeclareLaunchArgument(

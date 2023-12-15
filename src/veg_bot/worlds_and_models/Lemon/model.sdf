@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <!--
+This SDF file was automatically generated using a template modified 
+and authored by Adwait Naik. The moment of interia is not supposed to be changed.
+-->
+    <model name="lemon">
+      <pose>1.0 2.0 3.0 -1.0 -2.0 0</pose> 
+      <link name="link">
+        <inertial>
+          <inertia>
+           <ixx>3.41085798454103e-08</ixx>
+           <ixy>-1.4026000443507479e-24</ixy>
+           <ixz>-6.657374072955688e-24</ixz>
+           <iyy>3.393718081001612e-08</iyy>
+           <iyz>4.276566240104417e-24</iyz>
+           <izz>2.785774449123034e-08</izz>
+          </inertia>
+          <mass>9.683451845782233e-05</mass>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+          	<mesh>
+             <uri>textured.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+          	<mesh>
+            <uri>textured.dae</uri>
+	        </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+</sdf>

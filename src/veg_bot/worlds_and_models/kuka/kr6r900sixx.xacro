@@ -3,4 +3,16 @@
   xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:include filename="$(find veg_bot)/worlds_and_models/kuka/kr6r900sixx_macro.xacro" />
   <xacro:kuka_kr6r900sixx prefix=""/>
+
+  <gazebo>
+    <plugin filename="ignition-gazebo-detachable-joint-system" name="ignition::gazebo::systems::DetachableJoint">
+      <parent_link>link_6</parent_link>
+      <child_model>lemon</child_model>
+      <child_link>link</child_link>
+      <detach_topic>/lemon/detach</detach_topic>
+      <attach_topic>/lemon/attach</attach_topic>
+      <output_topic>/lemon/state</output_topic>
+    </plugin>
+  </gazebo>
+
 </robot>
