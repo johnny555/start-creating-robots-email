@@ -67,9 +67,19 @@ def generate_launch_description():
                   '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
                    '/lemon/detach@std_msgs/msg/Empty@gz.msgs.Empty',
                    '/lemon/attach@std_msgs/msg/Empty@gz.msgs.Empty',
+                   '/realsense/image@sensor_msgs/msg/Image[gz.msgs.Image',
+                   '/realsense/depth@sensor_msgs/msg/Image[gz.msgs.Image',
+                   '/realsense/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
                    ],
         output='screen',
     )
+
+    depth_cam_link_tf = Node(package='tf2_ros', 
+                             executable='static_transform_publisher', 
+                             name='depthCamLinkTF', 
+                             output='log', 
+                             arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 
+                             'realsense_d435', 'kr6_moveit/base_link/realsense_d435'])
 
 
     demo = IncludeLaunchDescription(join(get_package_share_directory("kr6_moveit"), "launch","demo.launch.py"), 
@@ -95,4 +105,11 @@ def generate_launch_description():
         output="both"
     )
 
-    return LaunchDescription([gazebo_sim, bridge, robot,  robot_state_publisher, with_sensors_arg, demo , sim_time, set_simtime_movegroup, set_simtime_rviz])
+    notebook_dir = join(get_package_share_directory("veg_bot"), "veg_bot")
+    start_notebook = ExecuteProcess(
+        cmd=["cd {} && python3 -m notebook".format(notebook_dir)],
+        shell=True,
+        output="screen",
+)
+
+    return LaunchDescription([gazebo_sim, bridge, robot, start_notebook, depth_cam_link_tf, robot_state_publisher, with_sensors_arg, demo , sim_time, set_simtime_movegroup, set_simtime_rviz])

@@ -3,6 +3,7 @@
   xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:include filename="$(find veg_bot)/worlds_and_models/kuka/kr6r900sixx_macro.xacro" />
   <xacro:kuka_kr6r900sixx prefix=""/>
+  <xacro:include filename="$(find veg_bot)/worlds_and_models/kuka/realsense.urdf.xacro" />
 
   <gazebo>
     <plugin filename="ignition-gazebo-detachable-joint-system" name="ignition::gazebo::systems::DetachableJoint">
@@ -12,6 +13,9 @@
       <detach_topic>/lemon/detach</detach_topic>
       <attach_topic>/lemon/attach</attach_topic>
       <output_topic>/lemon/state</output_topic>
+    </plugin>
+    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
     </plugin>
   </gazebo>
 

@@ -1,5 +1,4 @@
 import rclpy
-from rclpy.node import Node
 from std_msgs.msg import Empty
 from rclpy.logging import get_logger
 from rclpy.callback_groups import ReentrantCallbackGroup
