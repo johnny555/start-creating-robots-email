@@ -1,0 +1,6 @@
+# Default initial positions for scorpion's ros2_control fake system
+
+initial_positions:
+  joint_1: 0
+  joint_2: 0
+  joint_3: 0

@@ -10,6 +10,7 @@ import xacro
 
 
 def generate_launch_description():
+    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
 
     # This allows us to have the with_sensors as an argument on the command line
     with_sensors_arg =  DeclareLaunchArgument(
@@ -21,11 +22,11 @@ def generate_launch_description():
     models_path = join(get_package_share_directory("scorpion"), "worlds_and_models")
 
     # Start a simulation with the cafe world
-    cafe_world_uri = join(models_path,"simple_cafe.sdf")
+    cafe_world_uri = join(models_path,"scorp_world.sdf")
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
     
     gazebo_sim = IncludeLaunchDescription(path,
-                                          launch_arguments=[("gz_args",  "empty.sdf")])
+                                          launch_arguments=[("gz_args",  "-r " + cafe_world_uri )])
 
     # Create a robot in the world.
     # Steps: 
@@ -58,7 +59,7 @@ def generate_launch_description():
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+        arguments=[  '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
                    ],
         output='screen'
     )
@@ -69,4 +70,44 @@ def generate_launch_description():
         executable="rqt_robot_steering",
     )
 
-    return LaunchDescription([gazebo_sim, bridge, robot, robot_steering, robot_state_publisher, with_sensors_arg])
+    load_joint_state_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_state_broadcaster'],
+        output='screen'
+    )
+
+    load_diff_drive_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'diff_drive_base_controller'],
+        output='screen'
+    )
+
+    load_tail_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'tail_controller'],
+        output='screen'
+    )
+
+    demo = IncludeLaunchDescription(join(get_package_share_directory("scorpion_moveit"), "launch","demo.launch.py"), 
+                                    launch_arguments=[("use_sim_time",use_sim_time)])
+
+    sim_time = DeclareLaunchArgument(
+            'use_sim_time',
+            default_value=use_sim_time,
+            description='If true, use simulated clock')
+    
+        # Step 3. Spawn a robot in gazebo by listening to the published topic.
+    set_simtime_movegroup = ExecuteProcess(
+        cmd=["ros2", "param", "set", "/move_group","use_sim_time",  "True"],
+        name="move group sim time",
+        output="both"
+    )
+
+    # Step 3. Spawn a robot in gazebo by listening to the published topic.
+    set_simtime_rviz = ExecuteProcess(
+        cmd=["ros2", "param", "set", "/rviz","use_sim_time",  "True"],
+        name="move group sim time",
+        output="both"
+    )
+
+    return LaunchDescription([gazebo_sim, sim_time, bridge, demo, robot, set_simtime_movegroup, set_simtime_rviz, load_joint_state_controller, load_diff_drive_controller, load_tail_controller, robot_steering, robot_state_publisher, with_sensors_arg])

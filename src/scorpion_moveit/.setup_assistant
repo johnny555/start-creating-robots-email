@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: scorpion
+    relative_path: worlds_and_models/scorpion/scorpion.urdf.xacro
+  srdf:
+    relative_path: config/scorpion.srdf
+  package_settings:
+    author_name: John
+    author_email: john@soundelve.com
+    generated_timestamp: 1702808697
