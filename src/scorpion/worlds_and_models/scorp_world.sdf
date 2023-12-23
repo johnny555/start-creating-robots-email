@@ -30,9 +30,9 @@
           <surface>
             <friction>
               <ode>
-                <mu>1</mu>
-                <slip1>0.5</slip1>
-                <slip2>0.5</slip2>
+                <mu>10</mu>
+                <slip1>0.0</slip1>
+                <slip2>0.0</slip2>
               </ode>
             </friction>
             <bounce/>
@@ -70,7 +70,222 @@
       <pose>0 0 0 0 -0 0</pose>
       <self_collide>false</self_collide>
     </model>
+    <model name='access_pipe'>
+      <pose>2.00442 -1.8 0.915124 0 0 -1.52508</pose>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///workspace/src/scorpion/worlds_and_models/reactor_2/meshes/scorpion_reactor_environment-EntryPipe.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='pipe_col_floor'>
+          <pose>0.2 0 -0.12 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.155 0.128</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu1>0.5</mu1>
+                <mu2>1.0</mu2>
+                <fdir1>0 0 1</fdir1>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='pipe_col_top'>
+          <pose>0.2 0 0.12 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.155 0.128</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='pipe_col_left'>
+          <pose>0.2 0.15 0.0 1.57 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.155 0.128</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='pipe_col_right'>
+          <pose>0.2 -0.15 0 1.57 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.155 0.128</size>
+            </box>
+          </geometry>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='crd_rail'>
+      <static>true</static>
+      <pose>2.00598 -2.27127 0.848981 0 0.186106 -1.56838</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <pose>0 0 -0.06 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///workspace/src/scorpion/worlds_and_models/reactor_2/meshes/scorpion_reactor_environment-CRD_Rail.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='rail_base_collision'>
+          <pose>0.75 0 -0.12 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.5 0.255 0.128</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu1>0.5</mu1>
+                <mu2>1.0</mu2>
+                <fdir1>0 0 1</fdir1>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pedastal'>
+      <pose>1.98723 -7.42897 0.169162 0 -0 0</pose>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///workspace/src/scorpion/worlds_and_models/reactor_2/meshes/scorpion_reactor_environment-pedastal.dae</uri>
+            </mesh>
+          </geometry>
 
+        </visual>
+        <collision name='pedestal_collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <slip1>0.</slip1>
+                <slip2>0.0</slip2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <include>
+      <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/scorpion.sdf</uri>
+      <name>scorpion</name>
+      <pose>1.91 -1.21684 0.955008 -0 0 0</pose>
+      <self_collide>false</self_collide>
+    </include>
+    <model name='box'>
+      <pose>2.13 -1.37 0.425 0 -0 -0.000563</pose>
+      <link name='box_link'>
+        <inertial>
+          <inertia>
+            <ixx>0.16666</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.16666</iyy>
+            <iyz>0</iyz>
+            <izz>0.16666</izz>
+          </inertia>
+          <mass>1</mass>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='box_collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 0.9</size>
+            </box>
+
+          </geometry>
+
+        </collision>
+        <visual name='box_visual'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 0.9</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+      <self_collide>false</self_collide>
+    </model>
     <light name='sun' type='directional'>
       <pose>0 0 10 0 -0 0</pose>
       <cast_shadows>true</cast_shadows>

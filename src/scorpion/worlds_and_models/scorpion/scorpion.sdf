@@ -1,0 +1,682 @@
+<sdf version='1.9'>
+  <model name='scorpion'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.08999998419427797 5.333881995895085e-05 0 0 0 0</pose>
+        <mass>4</mass>
+        <inertia>
+          <ixx>0.01019999876502858</ixx>
+          <ixy>4.8004910330498377e-06</ixy>
+          <ixz>0</ixz>
+          <iyy>0.018299989834971431</iyy>
+          <iyz>0</iyz>
+          <izz>0.013499994600000001</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_fixed_joint_lump__chassis_link_collision'>
+        <pose>-0.08999998419427796 5.333881995895085e-05 0.03 0 0 3.141</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.09 0.03</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='base_link_fixed_joint_lump__chassis_link_visual'>
+        <pose>0 0 0 0 0 3.141</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_chassis_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 0 0 1</diffuse>
+          <ambient>1 0 0 1</ambient>
+        </material>
+      </visual>
+      <sensor name='realsense_d435' type='rgbd_camera'>
+        <topic>realsense</topic>
+        <update_rate>5</update_rate>
+        <camera name='depth_camera'>
+          <horizontal_fov>1.3999999999999999</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>5</far>
+          </clip>
+          <depth_camera>
+            <clip>
+              <near>0.10000000000000001</near>
+              <far>5</far>
+            </clip>
+            <output>depths</output>
+          </depth_camera>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.0070000000000000001</stddev>
+          </noise>
+        </camera>
+        <pose>0 0 0.1 0 -0 -0.00118531</pose>
+        <ignition_frame_id>chassis_camera_optical_link</ignition_frame_id>
+      </sensor>
+    </link>
+    <joint name='joint_1' type='revolute'>
+      <pose relative_to='base_link'>-0.1899999666323646 0.0001126041754688962 0.05 3.833233541708435e-20 0.7853981633974482 3.141</pose>
+      <parent>base_link</parent>
+      <child>tail_link1</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-3.1415926535897931</lower>
+          <upper>3.1400000000000001</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tail_link1'>
+      <pose relative_to='joint_1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.04 0 0 0 0 0</pose>
+        <mass>0.80000000000000004</mass>
+        <inertia>
+          <ixx>0.00012166661799999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00049666646800000007</iyy>
+          <iyz>0</iyz>
+          <izz>0.00058833309800000006</izz>
+        </inertia>
+      </inertial>
+      <collision name='tail_link1_collision'>
+        <pose>-0.042 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.085 0.04 0.015</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='tail_link1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_tail1_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 0 0 1</diffuse>
+          <ambient>1 0 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='joint_2' type='revolute'>
+      <pose relative_to='tail_link1'>-0.065 0 -0.008 0 0 0</pose>
+      <parent>tail_link1</parent>
+      <child>tail_link2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>10</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tail_link2'>
+      <pose relative_to='joint_2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.025 0 0 0 0 0</pose>
+        <mass>0.20000000000000001</mass>
+        <inertia>
+          <ixx>4.8749980500000002e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.5416636500000002e-05</iyy>
+          <iyz>0</iyz>
+          <izz>5.6666643999999998e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tail_link2_collision'>
+        <pose>-0.025 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.03 0.04</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='tail_link2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_tail2_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='joint_3' type='revolute'>
+      <pose relative_to='tail_link2'>-0.046 0 0 0 0 0</pose>
+      <parent>tail_link2</parent>
+      <child>tail_link3</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>10</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tail_link3'>
+      <pose relative_to='joint_3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.05 0 0 0 0 0</pose>
+        <mass>0.40000000000000002</mass>
+        <inertia>
+          <ixx>0.00011803328612000001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00043053316112000008</iyy>
+          <iyz>0</iyz>
+          <izz>0.00035416652500000012</izz>
+        </inertia>
+      </inertial>
+      <collision name='tail_link3_collision'>
+        <pose>-0.05 0 0 1.57 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.025 0.054</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='tail_link3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_tail3_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.9125 0.9125 1 1</diffuse>
+          <ambient>0.9125 0.9125 1 1</ambient>
+        </material>
+      </visual>
+      <sensor name='tailcamera' type='camera'>
+        <topic>tail_camera</topic>
+        <update_rate>5</update_rate>
+        <camera>
+          <horizontal_fov>1.0469999999999999</horizontal_fov>
+          <image>
+            <width>320</width>
+            <height>240</height>
+          </image>
+          <clip>
+            <near>0.10000000000000001</near>
+            <far>20</far>
+          </clip>
+        </camera>
+        <always_on>true</always_on>
+        <update_rate>5</update_rate>
+        <visualize>true</visualize>
+        <pose>-0.25 0 0 0 -0 3.141</pose>
+        <ignition_frame_id>tail_camera_link</ignition_frame_id>
+      </sensor>
+    </link>
+    <joint name='left_wheel_joint_1' type='revolute'>
+      <pose relative_to='base_link'>-0.01998043892029905 0.03301184727567059 0.015 0 0 3.141</pose>
+      <parent>base_link</parent>
+      <child>left_wheel_1</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>1</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_wheel_1'>
+      <pose relative_to='left_wheel_joint_1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 0 0</pose>
+        <mass>0.00050000000000000001</mass>
+        <inertia>
+          <ixx>1.354166125e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.354166125e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.4999999999999999e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_1_collision'>
+        <pose>0 0 0 1.57 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 1</fdir1>
+              <mu1>0.5</mu1>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='left_wheel_1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_wheel_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='left_wheel_joint_2' type='revolute'>
+      <pose relative_to='base_link'>-0.08998042662695968 0.03305333302452755 0.015 0 0 3.141</pose>
+      <parent>base_link</parent>
+      <child>left_wheel_2</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>1</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_wheel_2'>
+      <pose relative_to='left_wheel_joint_2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 0 0</pose>
+        <mass>0.00050000000000000001</mass>
+        <inertia>
+          <ixx>1.354166125e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.354166125e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.4999999999999999e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_2_collision'>
+        <pose>0 0 0 1.57 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 1</fdir1>
+              <mu1>0.5</mu1>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='left_wheel_2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_wheel_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='left_wheel_joint_3' type='revolute'>
+      <pose relative_to='base_link'>-0.1599804143336204 0.03309481877338451 0.015 0 0 3.141</pose>
+      <parent>base_link</parent>
+      <child>left_wheel_3</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>1</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_wheel_3'>
+      <pose relative_to='left_wheel_joint_3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 0 0</pose>
+        <mass>0.00050000000000000001</mass>
+        <inertia>
+          <ixx>1.354166125e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.354166125e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.4999999999999999e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_3_collision'>
+        <pose>0 0 0 1.57 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 1</fdir1>
+              <mu1>0.5</mu1>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='left_wheel_3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_wheel_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_wheel_joint_1' type='revolute'>
+      <pose relative_to='base_link'>-0.02001955405493561 -0.03298814113346661 0.015 0 0 3.141</pose>
+      <parent>base_link</parent>
+      <child>right_wheel_1</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>1</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_wheel_1'>
+      <pose relative_to='right_wheel_joint_1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 0 0</pose>
+        <mass>0.00050000000000000001</mass>
+        <inertia>
+          <ixx>1.354166125e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.354166125e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.4999999999999999e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_1_collision'>
+        <pose>0 0 0 1.57 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 1</fdir1>
+              <mu1>0.5</mu1>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='right_wheel_1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_wheel_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_wheel_joint_2' type='revolute'>
+      <pose relative_to='base_link'>-0.09001954176159624 -0.03294665538460965 0.015 0 0 3.141</pose>
+      <parent>base_link</parent>
+      <child>right_wheel_2</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>1</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_wheel_2'>
+      <pose relative_to='right_wheel_joint_2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 0 0</pose>
+        <mass>0.00050000000000000001</mass>
+        <inertia>
+          <ixx>1.354166125e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.354166125e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.4999999999999999e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_2_collision'>
+        <pose>0 0 0 1.57 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 1</fdir1>
+              <mu1>0.5</mu1>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='right_wheel_2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_wheel_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_wheel_joint_3' type='revolute'>
+      <pose relative_to='base_link'>-0.1600195294682569 -0.03290516963575269 0.015 0 0 3.141</pose>
+      <parent>base_link</parent>
+      <child>right_wheel_3</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>1</velocity>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_wheel_3'>
+      <pose relative_to='right_wheel_joint_3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 0 0</pose>
+        <mass>0.00050000000000000001</mass>
+        <inertia>
+          <ixx>1.354166125e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.354166125e-08</iyy>
+          <iyz>0</iyz>
+          <izz>2.4999999999999999e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_3_collision'>
+        <pose>0 0 0 1.57 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 1</fdir1>
+              <mu1>0.5</mu1>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='right_wheel_3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///workspace/install/scorpion/share/scorpion/worlds_and_models/scorpion/meshes/Unnamed_wheel_body.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.05375 0.005 0 1</diffuse>
+          <ambient>0.05375 0.005 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <plugin name='ign_ros2_control::IgnitionROS2ControlPlugin' filename='ign_ros2_control-system'>
+      <ros>
+        <remapping>/diff_drive_base_controller/odom:=odom</remapping>
+        <remapping>/diff_drive_base_controller/tf_odometry:=tf</remapping>
+        <remapping>/diff_drive_base_controller/cmd_vel_unstamped:=cmd_vel</remapping>
+      </ros>
+      <parameters>/workspace/install/scorpion/share/scorpion/config/diffdrive_control.yaml</parameters>
+    </plugin>
+    <plugin name='ignition::gazebo::systems::Sensors' filename='ignition-gazebo-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <frame name='chassis_camera_joint' attached_to='chassis_link'>
+      <pose>0 0 0.1 0 -0 3.141</pose>
+    </frame>
+    <frame name='chassis_camera_link' attached_to='chassis_camera_joint'/>
+    <frame name='chasis_link_joint' attached_to='base_link'>
+      <pose>0 0 0 0 -0 3.141</pose>
+    </frame>
+    <frame name='chassis_link' attached_to='chasis_link_joint'/>
+    <frame name='tail_camera_joint' attached_to='tail_link3'>
+      <pose>-0.25 0 0 0 -0 3.141</pose>
+    </frame>
+    <frame name='tail_camera_link' attached_to='tail_camera_joint'/>
+  </model>
+</sdf>
