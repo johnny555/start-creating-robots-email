@@ -34,19 +34,21 @@
     </link>
 
     <gazebo reference="${name}">
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-            <fdir1>0 0 1</fdir1>
-            <slip1>0.0</slip1>
-            <slip2>0.0</slip2>
-            <min_depth>0.5</min_depth>
-            <kp>1e8</kp>
-          </ode>
-        </friction>
-      </surface>
+      <collision>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+              <fdir1>0 0 1</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+              <min_depth>0.5</min_depth>
+              <kp>1e8</kp>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
     </gazebo>
   </xacro:macro>
 
